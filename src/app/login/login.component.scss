@@ -1,0 +1,30 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    .bg{
+        width: 50vw;
+        height: 100vh;
+    }
+}
+
+.mat-card{
+    align-self: center;
+    width: 20vw;
+    margin-left: 200px;
+}
+
+form{
+    
+    display:flex;
+    flex-direction: column;
+
+    .btn-action{
+        margin-bottom: 25px;
+        width: 50%;
+        color: white;
+        background-color: green;
+    }
+}
+
