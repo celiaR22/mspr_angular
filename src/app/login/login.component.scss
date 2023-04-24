@@ -12,16 +12,14 @@
 .mat-card{
     align-self: center;
     width: 20vw;
-    margin-left: 200px;
+    margin-right: 200px;
 }
 
 form{
-    
     display:flex;
     flex-direction: column;
-
     .btn-action{
-        margin-bottom: 25px;
+        margin: 20px 0 25px 0;
         width: 50%;
         color: white;
         background-color: green;

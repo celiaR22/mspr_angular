@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Login } from '../models/login';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,18 +13,22 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) { }
 
-  hide: boolean = true;// affichage du mot de passe
-  errorMessage: string = '';
-
-  loginForm: FormGroup = this.fb.group({
-    email:['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-    password:['' ,Validators.required]
-  })
+  hide: boolean = true;
+  errorMessage: any = [];
+  loginForm: FormGroup ; 
 
   ngOnInit(): void {
+    this.createForm();
   }
 
-  getFormData(data: any): Login{
+  createForm(): void{
+    this.loginForm = this.fb.group({
+      email:['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password:['' ,Validators.required]
+    })
+  }
+
+  getFormData(data: Login): Login{
     return{
       email: data.email,
       password: data.password
@@ -32,20 +36,43 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitForm(){
+    this.errorMessage = [];
     if(this.loginForm.valid){
-      console.log('valid')
       //on récup la data
       const data = this.getFormData(this.loginForm.value);
-      // on test avec la bdd
-      // si info sont bonne on redirige vers dashboard
+      // on test avec la bdd si infos sont bonnes
       this.router.navigate(['/dashboard']);
       // sinon on affiche une erreur
       // this.snackBar.open("Les informations ne sont pas bonnes",'X');
     }else{
-      console.log(this.loginForm.errors)
-      this.errorMessage = "pas bien remplis";
+      this.getFormErrors(this.loginForm);
     }
+  }
 
+  // fonction pour recuperer les erreurs des controls du formulaire
+  getFormErrors(form:FormGroup){
+    for (const controlName in form.controls){
+      const control = form.controls[controlName];
+      if (control.invalid) {
+        const controlErrors: ValidationErrors = control.errors;
+        for (const errorName in controlErrors) {
+          this.errorMessage[controlName] = this.getErrorMessage(controlName, errorName);
+        }
+      }
+    }
+    return this.errorMessage;
+  }
+
+  /// fonction pour afficher un message personnalider selon l'erreur
+  getErrorMessage(controlName: string, errorName: string) {
+    switch (errorName) {
+      case 'required':
+        return `Le champ ${controlName} est requis`;
+      case 'pattern':
+        return `Le champ ${controlName} n'est pas valide`;
+      default:
+        return `Le champ ${controlName} est invalide`;
+    }
   }
 
 }
