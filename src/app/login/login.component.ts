@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { Login } from '../models/login';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar, private authService : AuthService) { }
 
   hide: boolean = true;
   errorMessage: any = [];
@@ -40,6 +41,9 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       //on récup la data
       const data = this.getFormData(this.loginForm.value);
+      this.authService.login(data.email,data.password).subscribe((value)=>{
+        console.log(value)
+      })
       // on test avec la bdd si infos sont bonnes
       this.router.navigate(['/dashboard']);
       // sinon on affiche une erreur
