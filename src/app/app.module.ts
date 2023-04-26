@@ -12,7 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavBarComponent } from './share/nav-bar/nav-bar.component';
+import { NavBarComponent } from './share/nav-bar/navBar/nav-bar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ProfilComponent } from './profil/profil.component';
 import { RegisterComponent } from './register/register.component';
