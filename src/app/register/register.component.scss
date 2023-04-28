@@ -1,27 +1,47 @@
-.container{
+@use '@angular/material' as mat;
+
+.container {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: space-between;
-    .bg{
+
+    .bg {
         width: 50vw;
         height: 100vh;
     }
 }
 
-.mat-card{
+.mat-card {
+    @include mat.elevation(8);
     align-self: center;
-    width: 20vw;
-    margin-right: 200px;
+    margin-right: 6rem;
+
+    img {
+        width: 12rem;
+        height: 8rem;
+        margin: 0 auto 2rem auto;
+        display: block;
+    }
 }
 
-form{
-    display:flex;
-    flex-direction: column;
-    .btn-action{
-        margin: 20px 0 25px 0;
+form {
+
+    .btn-action {
         width: 50%;
         color: white;
         background-color: green;
+    }
+
+    .formRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        mat-form-field {
+            flex: 1;
+            margin-right: 10px;
+        }
     }
 }

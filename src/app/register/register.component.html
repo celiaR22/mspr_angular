@@ -1,44 +1,49 @@
 <div class="container">
-    <img class="bg" src="../../assets/image/background_test.jpg" alt="" >
-    <mat-card>
-      <img src="../../assets/image/image.png" alt="">
-      <mat-card-content>
-        <form [formGroup]='registerForm' (ngSubmit)="onSubmitForm()">
+  <img class="bg" src="../../assets/image/background_test.jpg" alt="">
+  <mat-card>
+    <img class="logo" src="../../assets/image/logo.png" alt="">
+    <mat-card-content>
+      <form [formGroup]='registerForm' (ngSubmit)="onSubmitForm()">
 
+        <div class="formRow">
           <!-- champs prénom -->
           <mat-form-field appearance="outline">
-            <mat-label>Enter your firstname</mat-label>
-            <input matInput type="text" formControlName="firstName" >
+            <mat-label>Votre prénom</mat-label>
+            <input matInput type="text" formControlName="firstName">
             <mat-error *ngIf="errorMessage.firstName">{{errorMessage.firstName}}</mat-error>
           </mat-form-field>
-            
+
           <!-- champs nom -->
           <mat-form-field appearance="outline">
-            <mat-label>Enter your lastname</mat-label>
-            <input matInput type="text" formControlName="lastName" >
+            <mat-label>Votre nom</mat-label>
+            <input matInput type="text" formControlName="lastName">
             <mat-error *ngIf="errorMessage.lastName">{{errorMessage.lastName}}</mat-error>
           </mat-form-field>
-  
+        </div>
+
+        <div class="formRow">
           <!-- champ email -->
           <mat-form-field appearance="outline">
-            <mat-label>Enter your email</mat-label>
+            <mat-label>Votre email</mat-label>
             <input matInput type="email" formControlName="email" placeholder="test@test.com">
             <mat-error *ngIf="errorMessage.email">{{errorMessage.email}}</mat-error>
-          </mat-form-field>         
+          </mat-form-field>
 
           <!-- champs email confirm -->
           <mat-form-field appearance="outline">
-            <mat-label>Confirm your email</mat-label>
-            <input matInput type="email" formControlName="confirmEmail" >
+            <mat-label>Confirmer l'email</mat-label>
+            <input matInput type="email" formControlName="confirmEmail">
             <mat-error *ngIf="errorMessage.confirmEmail">{{errorMessage.confirmEmail}}</mat-error>
-            <mat-error *ngIf="errorMessage.emailMismatch">{{errorMessage.emailMismatch}}</mat-error>
           </mat-form-field>
+        </div>
 
+        <div class="formRow">
           <!-- champs mdp -->
           <mat-form-field appearance="outline">
-            <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" >
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-label>Votre mot de passe</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="errorMessage.password">{{errorMessage.password}}</mat-error>
@@ -46,18 +51,19 @@
 
           <!-- champs mdp confirm -->
           <mat-form-field appearance="outline">
-            <mat-label>Confirm your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" >
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-label>Confirmer le mot de passe</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="errorMessage.confirmPassword">{{errorMessage.confirmPassword}}</mat-error>
-            <mat-error *ngIf="errorMessage.passwordMismatch">{{errorMessage.passwordMismatch}}</mat-error>
           </mat-form-field>
-                  
-          <button mat-raised-button class="btn-action">Register</button>
-  
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+        </div>
+
+        <button mat-raised-button class="btn-action">S'inscrire</button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
