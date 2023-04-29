@@ -1,8 +1,19 @@
+<mat-toolbar>
+    <mat-toolbar-row class="logo-container">
+        <img src="../../../assets/image/logo.png" alt="logo arosaje" class="logo">
+        <span>Arosaje</span>
+    </mat-toolbar-row>
+</mat-toolbar>
 <mat-toolbar color="primary">
-    <nav>
-        <ul *ngFor="let element of navigations">
-            <a [routerLink]="element.link">{{element.name}}</a>
-            <mat-icon>{{element.icon}}</mat-icon>
-        </ul>
-    </nav>      
+    <mat-toolbar-row *ngFor="let item of navigations" class="navButtons" routerLinkActive="activeLink"
+        routerLink="{{item.link}}">
+        <mat-icon>{{item.icon}}</mat-icon>
+        <span>{{item.name}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-toolbar class="profil-container">
+    <mat-toolbar-row class="profil">
+        <figure class="circle"></figure>
+        <span>Célia ROJAS</span>
+    </mat-toolbar-row>
 </mat-toolbar>

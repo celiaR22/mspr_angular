@@ -18,22 +18,30 @@ export class NavBarComponent implements OnInit {
     },
     {
       name: 'Rechercher',
-      link: '/search',
+      link: '/dashboard',
       icon: 'search'
     },
     {
-      name : 'Mes plantes',
+      name: 'Mes plantes',
       link: '/plant',
-      icon: 'yard',
+      icon: 'local_florist',
     },
     {
       name: 'Ajouter une plante',
       link: '/add',
       icon: 'add'
+    },
+    {
+      name: 'Se déconnecter',
+      link: '/logout',
+      icon: 'logout'
     }
   ];
 
   ngOnInit(): void {
   }
 
+  activeButton() {
+    console.log('test')
+  }
 }

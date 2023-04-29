@@ -1,12 +1,63 @@
-mat-toolbar{
-    width: 15vw;
-    height: 100vh;
-    nav{
-        ul{
-            display: flex;
-            flex-direction: column;
-        }
-        
-    }
+mat-toolbar:nth-child(2) {
+    justify-content: center;
+    height: 76vh;
 }
 
+mat-toolbar {
+    width: 15vw;
+    flex-wrap: wrap;
+
+    .activeLink {
+        background-color: grey;
+        border-radius: 18px;
+        width: 90%;
+    }
+
+    .logo-container {
+        background-color: lightgray;
+        height: 12vh;
+
+        .logo {
+            margin-right: 10px;
+            background-color: white;
+            border-radius: 50%;
+            height: 50px !important;
+            width: 50px;
+        }
+    }
+
+    .navButtons {
+        margin-left: 10px;
+        flex-wrap: wrap;
+
+        span {
+            font-size: 16px;
+        }
+
+        cursor: pointer;
+
+        mat-icon {
+            margin-right: 10px;
+        }
+
+        .material-icons {
+            font-size: 26px;
+        }
+    }
+
+    .profil {
+        background-color: lightgray;
+        height: 12vh;
+
+        .circle {
+            margin-right: 10px !important;
+            background: black;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            margin: 0;
+        }
+
+    }
+
+}
