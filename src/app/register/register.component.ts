@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { gestionForm } from '../share/nav-bar/form/gestionForm';
+import { gestionForm } from '../share/form/gestionForm';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../models/user';
 

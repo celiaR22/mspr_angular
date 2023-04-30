@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { gestionForm } from '../share/nav-bar/form/gestionForm';
+import { gestionForm } from '../share/form/gestionForm';
 
 @Component({
   selector: 'app-login',

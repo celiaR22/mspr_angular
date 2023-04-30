@@ -20,7 +20,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { MY_FORMAT } from './share/nav-bar/date/dateFormat';
+import { MY_FORMAT } from './share/date/dateFormat';
+import { SearchBarComponent } from './share/search-bar/search-bar.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { MY_FORMAT } from './share/nav-bar/date/dateFormat';
     DashboardComponent,
     NavBarComponent,
     ProfilComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,9 @@ import { MY_FORMAT } from './share/nav-bar/date/dateFormat';
     MatSnackBarModule,
     MatMenuModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatDividerModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
