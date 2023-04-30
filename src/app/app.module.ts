@@ -18,6 +18,9 @@ import { ProfilComponent } from './profil/profil.component';
 import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MY_FORMAT } from './share/nav-bar/date/dateFormat';
 
 @NgModule({
   declarations: [
@@ -40,10 +43,14 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Login } from '../models/login';
+import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { gestionForm } from '../share/nav-bar/form/gestionForm';
@@ -32,7 +32,7 @@ export class LoginComponent extends gestionForm implements OnInit {
     })
   }
 
-  getFormData(data: Login): Login {
+  getFormData(data: User): User {
     return {
       email: data.email,
       password: data.password

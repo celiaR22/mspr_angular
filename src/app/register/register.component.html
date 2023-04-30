@@ -22,6 +22,25 @@
         </div>
 
         <div class="formRow">
+          <!-- champs date de naissance -->
+          <mat-form-field appearance="outline">
+            <mat-label>Votre date de naissance</mat-label>
+            <input matInput [matDatepicker]="birthdate" formControlName="birthdate">
+            <mat-datepicker-toggle matSuffix [for]="birthdate">
+            </mat-datepicker-toggle>
+            <mat-datepicker #birthdate></mat-datepicker>
+            <mat-error *ngIf="errorMessage.birthdate">{{errorMessage.birthdate}}</mat-error>
+          </mat-form-field>
+
+          <!-- champs numéro tel -->
+          <mat-form-field appearance="outline">
+            <mat-label>Votre numéro de téléphone</mat-label>
+            <input matInput type="text" formControlName="phoneNumber">
+            <mat-error *ngIf="errorMessage.phoneNumber">{{errorMessage.phoneNumber}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="formRow">
           <!-- champ email -->
           <mat-form-field appearance="outline">
             <mat-label>Votre email</mat-label>

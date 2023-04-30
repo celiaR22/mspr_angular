@@ -38,6 +38,8 @@ export class gestionForm implements OnInit {
         return 'Les emails ne sont pas identiques.'
       case 'passwordNotIdentical':
         return 'Les mots de passes ne sont pas identiques.'
+      case 'dateAndAge':
+        return 'pas majeur'
       default:
         return `Le champ ${controlName} est invalide.`;
     }

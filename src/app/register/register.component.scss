@@ -15,7 +15,7 @@
 .mat-card {
     @include mat.elevation(8);
     align-self: center;
-    margin-right: 6rem;
+    margin-right: 10rem;
 
     img {
         width: 12rem;
@@ -26,8 +26,10 @@
 }
 
 form {
+    // height: 45vh;
 
     .btn-action {
+        margin-top: 2rem;
         width: 50%;
         color: white;
         background-color: green;
