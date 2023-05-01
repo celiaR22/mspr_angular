@@ -1,1 +1,35 @@
-<p>profil works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <mat-card class="pictureCard">
+        <mat-card-header>
+            <mat-card-title>Célia ROJAS</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <img *ngIf="!informationsProfil.picture" img src="../../assets/image/avatar.png.jpg" alt="">
+            <img *ngIf="informationsProfil.picture" img src="informationsProfil.picture" alt="">
+        </mat-card-content>
+        <button mat-raised-button color="primary">Modifier</button>
+    </mat-card>
+    <mat-card class="informationsCard">
+        <mat-card-header>
+            <mat-card-title>Informations personnelles</mat-card-title>
+        </mat-card-header>
+        <div>
+            <div>
+                <h3>Nom légal</h3>
+                <p>{{informationsProfil.lastname}}</p>
+            </div>
+            <button mat-raised-button color="primary">Modifier</button>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+            <div>
+                <h3>Email</h3>
+                <p>{{informationsProfil.email}}</p>
+            </div>
+            <button>Modifier</button>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-card>
+
+</div>

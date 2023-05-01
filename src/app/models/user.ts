@@ -7,3 +7,12 @@ export interface User {
     phone?: string;
 
 }
+
+export interface UserInformation {
+    email: string;
+    firstname: string;
+    lastname: string;
+    birthdate: string;
+    phone: string;
+    picture?: string
+}

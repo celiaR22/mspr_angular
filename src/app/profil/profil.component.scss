@@ -1,0 +1,37 @@
+.container {
+    width: 80rem;
+    margin: 2rem auto auto auto;
+    display: flex;
+    justify-content: space-evenly;
+
+    .pictureCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 40rem;
+        width: 20rem;
+
+        .mat-card-title {
+            text-align: center;
+        }
+
+        .mat-card-content {
+            display: flex;
+            justify-content: center;
+
+            img {
+                margin: 3rem auto 2rem auto;
+                border-radius: 50%;
+                text-align: center;
+            }
+        }
+    }
+
+    .informationsCard {
+        height: 40rem;
+        width: 40rem;
+
+
+    }
+
+}

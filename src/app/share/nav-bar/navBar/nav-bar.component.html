@@ -1,19 +1,33 @@
-<mat-toolbar>
-    <mat-toolbar-row class="logo-container">
-        <img src="../../../assets/image/logo.png" alt="logo arosaje" class="logo">
-        <span>Arosaje</span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-toolbar color="primary">
-    <mat-toolbar-row *ngFor="let item of navigations" class="navButtons" routerLinkActive="activeLink"
-        routerLink="{{item.link}}">
-        <mat-icon>{{item.icon}}</mat-icon>
-        <span>{{item.name}}</span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-toolbar class="profil-container">
-    <mat-toolbar-row class="profil">
-        <figure class="circle"></figure>
-        <span>Célia ROJAS</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav role="navigation">
+        <div>
+            <ul class="sidenav-items">
+                <li *ngFor="let item of navigations" routerLinkActive="activeLink" routerLink="{{item.link}}">
+                    <mat-icon>{{item.icon}}</mat-icon>
+                    <span>{{item.name}}</span>
+                </li>
+            </ul>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <div class="logo-container">
+                <img src="../../../../assets/image/logo.png" alt="">
+                <span>Arosaje</span>
+            </div>
+            <div *ngIf="!isMinScreen">
+                <ul class="navigation-items">
+                    <li *ngFor="let item of navigations" routerLinkActive="activeLink" routerLink="{{item.link}}">
+                        <mat-icon>{{item.icon}}</mat-icon>
+                        <span>{{item.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="isMinScreen">
+                <button mat-icon-button (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

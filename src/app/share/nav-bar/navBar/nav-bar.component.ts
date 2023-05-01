@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavBar } from 'src/app/models/navbar';
 
 @Component({
@@ -38,10 +38,23 @@ export class NavBarComponent implements OnInit {
     }
   ];
 
+  isMinScreen: boolean = false;
+
   ngOnInit(): void {
+    this.onResizeScreen()
   }
 
-  activeButton() {
-    console.log('test')
+  onToggleSidenav() {
+
+  }
+
+  /// permet un écran responsive avec affichage d'un menu burger
+  @HostListener('window:resize', ['$event'])
+  onResizeScreen() {
+    if (window.innerWidth < 1200) {
+      this.isMinScreen = true;
+    } else {
+      this.isMinScreen = false
+    }
   }
 }
