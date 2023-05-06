@@ -37,11 +37,15 @@ export class NavBarComponent implements OnInit {
       icon: 'logout'
     }
   ];
-
+  isHover: boolean = false;
   isMinScreen: boolean = false;
 
   ngOnInit(): void {
     this.onResizeScreen()
+  }
+
+  onHover(hover: boolean) {
+    this.isHover = hover ? true : false;
   }
 
   onToggleSidenav() {

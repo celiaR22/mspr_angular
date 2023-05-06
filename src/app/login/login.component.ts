@@ -46,12 +46,17 @@ export class LoginComponent extends gestionForm implements OnInit {
       //on récup la data
       const data = this.getFormData(this.loginForm.value);
       // on test avec la bdd si infos sont bonnes
-      this.authService.login(data.email, data.password).subscribe((value) => {
-        console.log(value)
+      this.authService.login(data).subscribe({
+        next: (value) => {
+          console.log(value);
+        },
+        error: (error: any) => {
+          this.snackBar.open(error.error.message, 'X', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          })
+        },
       })
-      // this.router.navigate(['/dashboard']);
-      // sinon on affiche une erreur
-      // this.snackBar.open("Les informations ne sont pas bonnes",'X');
     } else {
       this.getFormErrors(this.loginForm);
     }

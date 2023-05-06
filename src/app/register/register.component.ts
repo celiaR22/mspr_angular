@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { gestionForm } from '../share/form/gestionForm';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../models/user';
+import { AuthService } from '../services/auth.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,7 @@ import { User } from '../models/user';
 })
 export class RegisterComponent extends gestionForm implements OnInit {
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder) {
+  constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder, private authService: AuthService) {
     super()
   }
   hide: boolean = true;
@@ -33,8 +35,8 @@ export class RegisterComponent extends gestionForm implements OnInit {
         confirmEmail: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"), this.emailMatchValidator]],
         password: ['', Validators.required],
         confirmPassword: ['', [Validators.required, this.passwordMatchValidator]],
-        lastName: ['', Validators.required],
-        firstName: ['', Validators.required],
+        lastname: ['', Validators.required],
+        firstname: ['', Validators.required],
         phoneNumber: ['', [Validators.required, Validators.pattern("[0][1-9][0-9]{8}")]],
         birthdate: ['', [Validators.required]]
       },
@@ -45,8 +47,8 @@ export class RegisterComponent extends gestionForm implements OnInit {
     return {
       email: data.email,
       password: data.password,
-      firstname: data.firstName,
-      lastname: data.lastName,
+      firstname: data.firstname,
+      lastname: data.lastname,
       birthdate: data.birthdate,
       phone: data.phoneNumber
     }
@@ -54,17 +56,21 @@ export class RegisterComponent extends gestionForm implements OnInit {
 
   onSubmitForm() {
     if (this.registerForm.valid) {
-      //on récup la data
       const data = this.getFormData(this.registerForm.value);
-      console.log(data);
-      // on test avec la bdd si infos sont bonnes
-      this.router.navigate(['/dashboard']);
-      // sinon on affiche une erreur
-      // this.snackBar.open("Une erreur est survenue", 'X');
+      this.authService.signup(data).subscribe({
+        next: (value) => {
+          console.log(value);
+        },
+        error: (error: any) => {
+          this.snackBar.open(error.error.message, 'X', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          })
+        },
+      }
+      );
     } else {
       this.getFormErrors(this.registerForm);
-      console.log(this.registerForm)
-      console.log(this.errorMessage)
     }
   }
 

@@ -1,51 +1,51 @@
-@use '@angular/material' as mat;
+// @use '@angular/material' as mat;
 
-mat-toolbar {
-    @include mat.elevation(8);
-    width: 100vw;
-    justify-content: space-around;
+// mat-toolbar {
+//     @include mat.elevation(8);
+//     width: 100vw;
+//     justify-content: space-around;
 
-    .activeLink {
-        color: black;
-    }
+//     .activeLink {
+//         color: black;
+//     }
 
-    .logo-container {
-        display: flex;
-        align-items: center;
+//     .logo-container {
+//         display: flex;
+//         align-items: center;
 
-        img {
-            margin-right: 8px;
-            background-color: white;
-            border-radius: 50%;
-            height: 50px !important;
-            width: 50px;
-        }
-    }
+//         img {
+//             margin-right: 8px;
+//             background-color: white;
+//             border-radius: 50%;
+//             height: 50px !important;
+//             width: 50px;
+//         }
+//     }
 
-    li:hover {
-        color: lightgray;
-    }
+//     li:hover {
+//         color: lightgray;
+//     }
 
-    .navigation-items {
-        width: 60rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-evenly;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
+//     .navigation-items {
+//         width: 60rem;
+//         cursor: pointer;
+//         display: flex;
+//         justify-content: space-evenly;
+//         list-style-type: none;
+//         padding: 0;
+//         margin: 0;
 
-        li {
-            mat-icon {
-                margin-right: 8px;
-            }
+//         li {
+//             mat-icon {
+//                 margin-right: 8px;
+//             }
 
-            display: flex;
-            align-items: center;
-        }
-    }
+//             display: flex;
+//             align-items: center;
+//         }
+//     }
 
-}
+// }
 
 // .sidenav-container {
 //     position: absolute;
@@ -75,3 +75,72 @@ mat-toolbar {
 //     }
 
 // }
+
+mat-toolbar:nth-child(2) {
+    justify-content: center;
+    height: 76vh;
+}
+
+.hover {
+    width: 14rem;
+}
+
+mat-toolbar {
+
+
+    width: 5rem;
+
+    .activeLink {
+        background-color: white;
+        color: black;
+        border-top-left-radius: 18px;
+        border-bottom-left-radius: 18px;
+    }
+
+    .logo-container {
+        background-color: lightgray;
+        height: 12vh;
+
+        .logo {
+            margin-right: 8px;
+            background-color: white;
+            border-radius: 50%;
+            height: 50px !important;
+            width: 50px;
+        }
+    }
+
+    .navButtons {
+        margin-left: 8px;
+        flex-wrap: wrap;
+
+        span {
+            font-size: 16px;
+        }
+
+        cursor: pointer;
+
+        mat-icon {
+            margin-right: 10px;
+        }
+
+        .material-icons {
+            font-size: 26px;
+        }
+    }
+
+    .profil {
+        background-color: gray;
+        height: 12vh;
+
+        .avatar {
+            margin-right: 8px !important;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            margin: 0;
+        }
+
+    }
+
+}
