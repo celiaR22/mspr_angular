@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { gestionForm } from '../share/form/gestionForm';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { gestionForm } from '../share/form/gestionForm';
 })
 export class LoginComponent extends gestionForm implements OnInit {
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder) {
+  constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder, private authService: AuthService) {
     super()
   }
   loginForm: FormGroup;
@@ -43,9 +44,12 @@ export class LoginComponent extends gestionForm implements OnInit {
     this.errorMessage = [];
     if (this.loginForm.valid) {
       //on récup la data
-      //  const data = this.getFormData(this.loginForm.value);
+      const data = this.getFormData(this.loginForm.value);
       // on test avec la bdd si infos sont bonnes
-      this.router.navigate(['/dashboard']);
+      this.authService.login(data.email, data.password).subscribe((value) => {
+        console.log(value)
+      })
+      // this.router.navigate(['/dashboard']);
       // sinon on affiche une erreur
       // this.snackBar.open("Les informations ne sont pas bonnes",'X');
     } else {

@@ -25,6 +25,7 @@ import { SearchBarComponent } from './share/search-bar/search-bar.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    HttpClientModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
