@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { ProfilComponent } from './profil/profil.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from './auth.guard';
-import { PlantComponent } from './plant/plant/plant.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'profil', component: ProfilComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'plant', component: PlantComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
