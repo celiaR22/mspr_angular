@@ -10,12 +10,10 @@
     .mat-card {
         margin: 0 5rem 5rem 0;
         @include mat.elevation(8);
-        width: 15rem;
+        width: 20rem;
 
         .mat-card-image {
-            // width: 25rem;
             background-size: cover;
-            // height: 40%;
         }
     }
 }
