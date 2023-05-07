@@ -26,6 +26,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
+import { PlantComponent } from './plant/plant/plant.component';
+import { CardPlantComponent } from './plant/card-plant/card-plant.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { HttpClientModule } from '@angular/common/http';
     NavBarComponent,
     ProfilComponent,
     RegisterComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    PlantComponent,
+    CardPlantComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatAutocompleteModule,
     MatDividerModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
+    MatChipsModule,
+    MatListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

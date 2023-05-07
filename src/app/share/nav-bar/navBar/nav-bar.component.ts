@@ -1,4 +1,6 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Observable, map, shareReplay } from 'rxjs';
 import { NavBar } from 'src/app/models/navbar';
 
 @Component({
@@ -8,14 +10,9 @@ import { NavBar } from 'src/app/models/navbar';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   navigations: NavBar[] = [
-    {
-      name: 'Mon profil',
-      link: '/profil',
-      icon: 'person'
-    },
     {
       name: 'Rechercher',
       link: '/dashboard',
@@ -32,33 +29,24 @@ export class NavBarComponent implements OnInit {
       icon: 'add'
     },
     {
+      name: 'Mon profil',
+      link: '/profil',
+      icon: 'person'
+    },
+    {
       name: 'Se déconnecter',
       link: '/logout',
       icon: 'logout'
     }
   ];
-  isHover: boolean = false;
-  isMinScreen: boolean = false;
 
   ngOnInit(): void {
-    this.onResizeScreen()
   }
 
-  onHover(hover: boolean) {
-    this.isHover = hover ? true : false;
-  }
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
-  onToggleSidenav() {
-
-  }
-
-  /// permet un écran responsive avec affichage d'un menu burger
-  @HostListener('window:resize', ['$event'])
-  onResizeScreen() {
-    if (window.innerWidth < 1200) {
-      this.isMinScreen = true;
-    } else {
-      this.isMinScreen = false
-    }
-  }
 }

@@ -1,53 +1,44 @@
-<!-- <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav role="navigation">
-        <div>
-            <ul class="sidenav-items">
-                <li *ngFor="let item of navigations" routerLinkActive="activeLink" routerLink="{{item.link}}">
-                    <mat-icon>{{item.icon}}</mat-icon>
-                    <span>{{item.name}}</span>
-                </li>
-            </ul>
-        </div>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar color="primary">
-            <div class="logo-container">
-                <img src="../../../../assets/image/logo.png" alt="">
-                <span>Arosaje</span>
-            </div>
-            <div *ngIf="!isMinScreen">
-                <ul class="navigation-items">
-                    <li *ngFor="let item of navigations" routerLinkActive="activeLink" routerLink="{{item.link}}">
-                        <mat-icon>{{item.icon}}</mat-icon>
-                        <span>{{item.name}}</span>
-                    </li>
-                </ul>
-            </div>
-            <div *ngIf="isMinScreen">
-                <button mat-icon-button (click)="sidenav.toggle()">
-                    <mat-icon>menu</mat-icon>
-                </button>
-            </div>
-        </mat-toolbar>
-    </mat-sidenav-content>
-</mat-sidenav-container> -->
+<div>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row class="logo-container">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="(isHandset$ | async)">
+                <mat-icon *ngIf="drawer.opened === false" aria-label="Side nav toggle icon">menu</mat-icon>
+                <mat-icon *ngIf="drawer.opened === true" aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <img src="../../../assets/image/logo.png" alt="logo arosaje" class="logo">
+            <span *ngIf="!(isHandset$ | async)">Arosaje</span>
+            <span class="fill-remaining-space"></span>
+            <!-- <button mat-button>
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Deconnexion</span>
+            </button> -->
+        </mat-toolbar-row>
+    </mat-toolbar>
 
-<mat-toolbar (mouseover)="onHover(true)" (mouseleave)="onHover(false)" [class.hover]="isHover">
-    <mat-toolbar-row class="logo-container">
-        <img src="../../../assets/image/logo.png" alt="logo arosaje" class="logo">
-        <span *ngIf="isHover">Arosaje</span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-toolbar color="primary" (mouseover)="onHover(true)" (mouseleave)="onHover(false)" [class.hover]="isHover">
-    <mat-toolbar-row *ngFor="let item of navigations" class="navButtons" routerLinkActive="activeLink"
-        routerLink="{{item.link}}">
-        <mat-icon>{{item.icon}}</mat-icon>
-        <span *ngIf="isHover">{{item.name}}</span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-toolbar class="profil-container" (mouseover)="onHover(true)" (mouseleave)="onHover(false)" [class.hover]="isHover">
-    <mat-toolbar-row class="profil">
-        <img class="avatar" src="../../../../assets/image/avatar.png.jpg" alt="">
-        <span *ngIf="isHover">Célia ROJAS</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #drawer class="sidenav" fixedInViewport fixedToGap="64"
+            [attr.role]="(isHandset$ |async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+            [opened]="(isHandset$ | async) === false">
+
+            <mat-nav-list>
+                <a *ngFor="let item of navigations" mat-list-item routerLink="{{item.link}}"
+                    routerLinkActive="List-item-active">
+                    <mat-icon matListIcon>{{item.icon}}</mat-icon>
+                    {{item.name}}
+                    <mat-divider></mat-divider>
+                </a>
+            </mat-nav-list>
+            <mat-toolbar-row class="profil">
+                <img class="avatar" src="../../../../assets/image/avatar.png" alt="">
+                <span>Célia ROJAS</span>
+            </mat-toolbar-row>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <div class="main_content">
+                <ng-content></ng-content>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

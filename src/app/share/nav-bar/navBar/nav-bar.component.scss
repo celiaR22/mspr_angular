@@ -1,137 +1,36 @@
-// @use '@angular/material' as mat;
+.sidenav-container {
+    height: 100%;
 
-// mat-toolbar {
-//     @include mat.elevation(8);
-//     width: 100vw;
-//     justify-content: space-around;
+    .sidenav {
+        padding-top: 60px;
+        width: 200px;
 
-//     .activeLink {
-//         color: black;
-//     }
+        ::ng-deep .mat-drawer-inner-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-//     .logo-container {
-//         display: flex;
-//         align-items: center;
+        .mat-nav-list {
+            margin: 10rem 0 0 0;
 
-//         img {
-//             margin-right: 8px;
-//             background-color: white;
-//             border-radius: 50%;
-//             height: 50px !important;
-//             width: 50px;
-//         }
-//     }
-
-//     li:hover {
-//         color: lightgray;
-//     }
-
-//     .navigation-items {
-//         width: 60rem;
-//         cursor: pointer;
-//         display: flex;
-//         justify-content: space-evenly;
-//         list-style-type: none;
-//         padding: 0;
-//         margin: 0;
-
-//         li {
-//             mat-icon {
-//                 margin-right: 8px;
-//             }
-
-//             display: flex;
-//             align-items: center;
-//         }
-//     }
-
-// }
-
-// .sidenav-container {
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-//     left: 0;
-//     right: 0;
-
-//     .sidenav-items {
-//         height: 12rem;
-//         margin: 5rem 0 0 2rem;
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: space-between;
-//         list-style-type: none;
-
-//         li {
-//             cursor: pointer;
-//             display: flex;
-//             align-items: flex-end;
-
-//             mat-icon {
-//                 margin-right: 8px;
-//             }
-//         }
-
-//     }
-
-// }
-
-mat-toolbar:nth-child(2) {
-    justify-content: center;
-    height: 76vh;
-}
-
-.hover {
-    width: 14rem;
-}
-
-mat-toolbar {
-
-
-    width: 5rem;
-
-    .activeLink {
-        background-color: white;
-        color: black;
-        border-top-left-radius: 18px;
-        border-bottom-left-radius: 18px;
-    }
-
-    .logo-container {
-        background-color: lightgray;
-        height: 12vh;
-
-        .logo {
-            margin-right: 8px;
-            background-color: white;
-            border-radius: 50%;
-            height: 50px !important;
-            width: 50px;
+            .List-item-active {
+                background: rgba(0, 0, 0, .04);
+            }
         }
     }
 
-    .navButtons {
-        margin-left: 8px;
-        flex-wrap: wrap;
+    .sidenav .mat-toolbar {
+        background: inherit;
+    }
 
-        span {
-            font-size: 16px;
-        }
-
-        cursor: pointer;
-
-        mat-icon {
-            margin-right: 10px;
-        }
-
-        .material-icons {
-            font-size: 26px;
-        }
+    .main_content {
+        margin: 15px 15px 15px 15px;
     }
 
     .profil {
-        background-color: gray;
-        height: 12vh;
+        background-color: lightgray;
+        height: 15vh;
 
         .avatar {
             margin-right: 8px !important;
@@ -140,7 +39,28 @@ mat-toolbar {
             width: 50px;
             margin: 0;
         }
-
     }
+}
 
+.mat-toolbar {
+    .logo-container {
+        .logo {
+            margin-right: 8px;
+            background-color: white;
+            border-radius: 50%;
+            height: 50px !important;
+            width: 50px;
+        }
+    }
+}
+
+
+.mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
 }
