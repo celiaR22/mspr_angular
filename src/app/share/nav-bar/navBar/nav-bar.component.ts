@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable, map, shareReplay } from 'rxjs';
 import { NavBar } from 'src/app/models/navbar';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,12 +11,12 @@ import { NavBar } from 'src/app/models/navbar';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) { }
 
   navigations: NavBar[] = [
     {
       name: 'Rechercher',
-      link: '/dashboard',
+      link: '/search',
       icon: 'search'
     },
     {
@@ -33,11 +34,11 @@ export class NavBarComponent implements OnInit {
       link: '/profil',
       icon: 'person'
     },
-    {
-      name: 'Se déconnecter',
-      link: '/logout',
-      icon: 'logout'
-    }
+    // {
+    //   name: 'Se déconnecter',
+    //   link: '/logout',
+    //   icon: 'logout'
+    // }
   ];
 
   ngOnInit(): void {
@@ -49,4 +50,7 @@ export class NavBarComponent implements OnInit {
       shareReplay()
     );
 
+  logout() {
+    this.authService.logout();
+  }
 }

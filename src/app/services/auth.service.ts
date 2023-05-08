@@ -1,21 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
+  constructor(private http: HttpClient, private router: Router) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient) {
   }
 
   login(data: User): Observable<User> {
-    const password = data.password
-    const email = data.email
-    return this.http.post<User>('http://localhost:8082/login', { email, password })
+    const password = data.password;
+    const email = data.email;
+    return this.http.post<User>('http://localhost:8082/login', { email, password }).pipe(map(user => {
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+      return user;
+    }))
+  }
+
+  logout() {
+    sessionStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 
   signup(data: User) {

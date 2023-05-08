@@ -48,7 +48,7 @@ export class LoginComponent extends gestionForm implements OnInit {
       // on test avec la bdd si infos sont bonnes
       this.authService.login(data).subscribe({
         next: (value) => {
-          console.log(value);
+          this.router.navigate(['/dashboard']);
         },
         error: (error: any) => {
           this.snackBar.open(error.error.message, 'X', {

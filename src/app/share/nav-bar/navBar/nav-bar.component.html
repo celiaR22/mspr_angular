@@ -9,10 +9,10 @@
             <img src="../../../assets/image/logo.png" alt="logo arosaje" class="logo">
             <span *ngIf="!(isHandset$ | async)">Arosaje</span>
             <span class="fill-remaining-space"></span>
-            <!-- <button mat-button>
+            <button mat-button (click)='logout()'>
                 <mat-icon>exit_to_app</mat-icon>
                 <span>Deconnexion</span>
-            </button> -->
+            </button>
         </mat-toolbar-row>
     </mat-toolbar>
 
