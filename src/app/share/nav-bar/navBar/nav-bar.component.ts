@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
     },
     {
       name: 'Mes plantes',
-      link: '/plant',
+      link: '/plants',
       icon: 'local_florist',
     },
     {

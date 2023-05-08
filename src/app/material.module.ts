@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
     exports: [
@@ -39,7 +40,8 @@ import { MatListModule } from '@angular/material/list';
         MatSidenavModule,
         HttpClientModule,
         MatChipsModule,
-        MatListModule
+        MatListModule,
+        TextFieldModule
     ],
     providers: [
         { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

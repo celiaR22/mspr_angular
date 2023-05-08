@@ -10,12 +10,16 @@ import { NavBarComponent } from '../share/nav-bar/navBar/nav-bar.component';
 import { AuthGuard } from '../auth.guard';
 import { SearchComponent } from './search/search.component';
 import { SearchBarComponent } from '../share/search-bar/search-bar.component';
+import { AddPlantComponent } from './plant/add-plant/add-plant.component';
+
 
 const managementRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'plant', component: PlantComponent, canActivate: [AuthGuard] },
+  { path: 'plants', component: PlantComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+  { path: 'plant/:id', component: AddPlantComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+  { path: 'add', component: AddPlantComponent, canActivate: [AuthGuard] },
 ]
 
 @NgModule({
@@ -26,7 +30,8 @@ const managementRoutes: Routes = [
     ProfilComponent,
     NavBarComponent,
     SearchComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    AddPlantComponent
   ],
   imports: [
     CommonModule,

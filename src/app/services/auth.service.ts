@@ -12,8 +12,8 @@ export class AuthService {
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    // this.currentUser = this.currentUserSubject.asObservable();
 
   }
 
@@ -22,14 +22,14 @@ export class AuthService {
     const email = data.email;
     return this.http.post<User>('http://localhost:8082/login', { email, password }).pipe(map(user => {
       sessionStorage.setItem('currentUser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
+      // this.currentUserSubject.next(user);
       return user;
     }))
   }
 
   logout() {
     sessionStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    // this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
 

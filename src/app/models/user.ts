@@ -5,7 +5,7 @@ export interface User {
     lastname?: string;
     birthdate?: string;
     phone?: string;
-
+    jwt?: string
 }
 
 export interface UserInformation {
