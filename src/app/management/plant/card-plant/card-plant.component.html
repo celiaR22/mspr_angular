@@ -1,20 +1,19 @@
-<div class="plantContainer" *ngIf="plants.length > 0">
+<div class="plantContainer">
     <mat-card class="example-card" *ngFor="let plant of plants">
         <mat-card-header>
-            <mat-card-title>{{plant.name}}</mat-card-title>
-            <mat-card-subtitle>{{plant.type}}</mat-card-subtitle>
+            <mat-card-title>{{plant.name_plant}}</mat-card-title>
+            <mat-card-subtitle>{{plant.type_plant}}</mat-card-subtitle>
         </mat-card-header>
         <!-- <img mat-card-image src="../../../assets/image/avatar.png" alt="{{plant.name}}"> -->
         <mat-card-content>
             <p>
-                {{plant.instruction}}
+                {{plant.instructions_plant}}
             </p>
-            <button mat-button color="primary">{{plant.status}}</button>
+            <button mat-button color="primary">{{plant.status_plant}}</button>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="updatePlant(plant.id)">Modifier</button>
+            <button mat-raised-button color="primary" (click)="updatePlant(plant.plant_id)">Modifier</button>
             <button mat-raised-button color="warn" (click)="deletePlantById(plant)">Supprimer</button>
         </mat-card-actions>
     </mat-card>
 </div>
-<div *ngIf="plants.length ==  0"> Vous n'avez pas de plantes pour le moment</div>

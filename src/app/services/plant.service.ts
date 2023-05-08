@@ -9,24 +9,19 @@ import { HttpHeaders } from '@angular/common/http';
 export class PlantService {
 
   constructor(private http: HttpClient) { }
+  token = sessionStorage.getItem('currentUser');
 
   getPlantByUser(data: string) {
-    const test = JSON.parse(data);
-    // console.log(test)
-    // const header = new HttpHeaders({
-    //   'Content-type': 'application/json',
-    //   'Authorization': `${test.jwt}`
-    // })
-
-    // const headers = new HttpHeaders()
-    //   .set('Content-type', 'application/json')
-    //   .set('Authorization', `Bearer ${test}`);
-    const token = test.jwt;
+    const token = JSON.parse(data);
     const headers = new HttpHeaders()
-      // .set('Content-type', 'application/json')
-      .set('Authorization', `Bearer ${test.jwt}`)
-
-    console.log(headers)
+      .set('Authorization', `Bearer ${token.jwt}`)
     return this.http.get<Plant>('http://localhost:8082/plant/all', { headers })
+  }
+
+  deletePlantById(id: number) {
+    const token = JSON.parse(this.token);
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token.jwt}`)
+    return this.http.delete(`http://localhost:8082/plant/${id}`, { headers })
   }
 }

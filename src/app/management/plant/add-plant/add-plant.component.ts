@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Plant } from 'src/app/models/plant';
 import { ActivatedRoute } from '@angular/router';
+import { PlantService } from 'src/app/services/plant.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-plant',
@@ -11,69 +13,49 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddPlantComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private plantService: PlantService, private snackBar: MatSnackBar) { }
   plantForm: FormGroup;
   plantsArray: Plant[];
   plant: Plant;
 
   ngOnInit(): void {
     this.loadData();
-    this.createForm();
-    this.getPlantById();
+    this.createForm()
   }
 
   createForm() {
+    /// on cree le formulaire en mettant par défaut avec un '?', 
+    //si c'est un ajout l input sera vide si c'est un update il prendra la valeur de la plante cliquer 
     this.plantForm = this.fb.group({
-      plantName: ['', Validators.required],
-      plantType: ['', Validators.required],
-      plantInstruction: ['', Validators.required]
+      plantName: [this.plant?.name_plant, Validators.required],
+      plantType: [this.plant?.type_plant, Validators.required],
+      plantInstruction: [this.plant?.instructions_plant, Validators.required]
     })
   }
 
   loadData() {
-    this.plantsArray = [{
-      id: 1,
-      user_id: 2,
-      name: 'mimosas',
-      instruction: 'arrosé matin et soir',
-      type: 'fleur',
-      status: 'libre'
-    },
-    {
-      id: 2,
-      user_id: 2,
-      name: 'tulipe',
-      instruction: 'arrosé matin et soir',
-      type: 'fleur',
-      status: 'garder'
-    },
-    {
-      id: 3,
-      user_id: 4,
-      name: 'romarin',
-      instruction: 'arrosé matin et soir',
-      type: 'herbe aromatique',
-      status: 'libre'
-    },
-    {
-      id: 5,
-      user_id: 2,
-      name: 'menthe',
-      instruction: 'arrosé matin et soir',
-      type: 'herbe aromatique',
-      status: 'libre'
-    },
-    ]
+    this.plantService.getPlantByUser(sessionStorage.getItem('currentUser')).subscribe({
+      next: (value) => {
+        const plantId = this.activatedRoute.snapshot.params['id'];
+        this.plantsArray = value['plant'];
+        this.plant = this.plantsArray.find((plant) => plant.plant_id == plantId)
+        this.createForm();
+      },
+      error: (error: any) => {
+        this.snackBar.open(error.error.message, 'X', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        })
+      },
+    })
   }
 
   getData(data: any): Plant {
     return {
-      id: 10,
-      user_id: 2,
-      name: data.plantName,
-      instruction: data.plantInstruction,
-      type: data.plantType,
-      status: 'libre',
+      name_plant: data.plantName,
+      instructions_plant: data.plantInstruction,
+      type_plant: data.plantType,
+      status_plant: 'libre',
     }
   }
 
@@ -93,7 +75,7 @@ export class AddPlantComponent implements OnInit {
 
   getPlantById() {
     const plantId = this.activatedRoute.snapshot.params['id'];
-    this.plant = this.plantsArray.find((plant) => plant.id == plantId);
+    return this.plantsArray.find((plant) => plant.plant_id == plantId);
   }
 
 }
