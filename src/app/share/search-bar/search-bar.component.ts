@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GeocodingService }from '../../services/geocoding.service'
 
 @Component({
   selector: 'app-search-bar',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SearchBarComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private geocodingService:GeocodingService) { }
   searchForm: FormGroup
 
 
@@ -35,7 +36,12 @@ export class SearchBarComponent implements OnInit {
 
   submitForm() {
     const data = this.getData(this.searchForm);
-    console.log(data)
+    console.log(data.localisation)
+    this.geocodingService.searchLocation(data.localisation).subscribe((value)=> {
+      console.log(value);
+      
+    })
+    //get sur ca "https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port"
   }
 
 
