@@ -10,6 +10,7 @@ import { NavBarComponent } from '../share/nav-bar/navBar/nav-bar.component';
 import { AuthGuard } from '../auth.guard';
 import { SearchComponent } from './search/search.component';
 import { SearchBarComponent } from '../share/search-bar/search-bar.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 const managementRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -26,11 +27,12 @@ const managementRoutes: Routes = [
     ProfilComponent,
     NavBarComponent,
     SearchComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
   imports: [
     CommonModule,
     AppMaterialModule,
+    LeafletModule,
     RouterModule.forChild(managementRoutes)
   ]
 })
