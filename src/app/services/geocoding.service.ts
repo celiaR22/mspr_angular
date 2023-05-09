@@ -13,6 +13,6 @@ export class GeocodingService {
   }
 
   searchLocation(location){
-    return this.http.get(`https://api-adresse.data.gouv.fr/search/?q=${location}`)
+    return this.http.get(`https://nominatim.openstreetmap.org/search?q=${location},+France&format=json&limit=4`)
   }
 }

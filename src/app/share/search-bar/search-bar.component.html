@@ -3,9 +3,9 @@
     <mat-form-field appearance="standard" class="border">
         <input matInput [matAutocomplete]="auto" placeholder="Localisation" formControlName="localisation">
         <mat-autocomplete #auto="matAutocomplete">
-            <!-- <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option.name}}
-                    </mat-option> -->
+            <mat-option *ngFor="let option of filteredOptions" [value]="option.display_name">
+                        {{option.display_name}}
+            </mat-option>
         </mat-autocomplete>
     </mat-form-field>
 

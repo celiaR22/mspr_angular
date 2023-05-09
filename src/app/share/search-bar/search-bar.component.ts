@@ -11,6 +11,7 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private geocodingService:GeocodingService) { }
   searchForm: FormGroup
+  filteredOptions
 
 
   ngOnInit(): void {
@@ -36,12 +37,18 @@ export class SearchBarComponent implements OnInit {
 
   submitForm() {
     const data = this.getData(this.searchForm);
-    console.log(data.localisation)
-    this.geocodingService.searchLocation(data.localisation).subscribe((value)=> {
-      console.log(value);
+   
+    let result = this.geocodingService.searchLocation(data.localisation).subscribe((value)=> {
+      this.filteredOptions = value
+      
+      for (let i = 0; i < this.filteredOptions.length; i++) {
+        const element = this.filteredOptions[i];
+        console.log(element.display_name);
+        
+      }
       
     })
-    //get sur ca "https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port"
+   
   }
 
 
