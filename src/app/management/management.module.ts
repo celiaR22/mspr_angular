@@ -11,6 +11,7 @@ import { AuthGuard } from '../auth.guard';
 import { SearchComponent } from './search/search.component';
 import { SearchBarComponent } from '../share/search-bar/search-bar.component';
 import { AddPlantComponent } from './plant/add-plant/add-plant.component';
+import { StatusPlantColorPipe } from './status-plant-color.pipe';
 
 
 const managementRoutes: Routes = [
@@ -31,7 +32,8 @@ const managementRoutes: Routes = [
     NavBarComponent,
     SearchComponent,
     SearchBarComponent,
-    AddPlantComponent
+    AddPlantComponent,
+    StatusPlantColorPipe
   ],
   imports: [
     CommonModule,

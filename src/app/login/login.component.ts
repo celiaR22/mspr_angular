@@ -18,6 +18,8 @@ export class LoginComponent extends gestionForm implements OnInit {
   }
   loginForm: FormGroup;
   hide: boolean = true;
+  choiceUser: boolean = false;
+  isLoginBotaniste: boolean;
 
   superngOnInit(): void {
   }
@@ -33,6 +35,15 @@ export class LoginComponent extends gestionForm implements OnInit {
     })
   }
 
+  isBotaniste(isBotaniste: boolean) {
+    this.isLoginBotaniste = isBotaniste;
+    this.choiceUser = true;
+  }
+
+  goBack() {
+    this.choiceUser = false;
+  }
+
   getFormData(data: User): User {
     return {
       email: data.email,
@@ -45,18 +56,23 @@ export class LoginComponent extends gestionForm implements OnInit {
     if (this.loginForm.valid) {
       //on récup la data
       const data = this.getFormData(this.loginForm.value);
-      // on test avec la bdd si infos sont bonnes
-      this.authService.login(data).subscribe({
-        next: (value) => {
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error: any) => {
-          this.snackBar.open(error.error.message, 'X', {
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          })
-        },
-      })
+      // selon le profil choisis ( botaniste ou aroseur) on fait le loggin correspondant
+      if (this.isLoginBotaniste == true) {
+        /// log botaniste
+      } else {
+        this.authService.login(data).subscribe({
+          next: (value) => {
+            this.router.navigate(['/dashboard']);
+          },
+          error: (error: any) => {
+            this.snackBar.open(error.error.message, 'X', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          },
+        })
+      }
+
     } else {
       this.getFormErrors(this.loginForm);
     }

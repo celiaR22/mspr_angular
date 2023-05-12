@@ -1,7 +1,14 @@
 <div class="container">
 
   <img class="bg" src="../../assets/image/background_test.jpg" alt="">
-  <mat-card>
+
+  <div *ngIf="!choiceUser" class="btn-choice">
+    <button mat-raised-button class="btn-action" (click)="isBotaniste(false)">A'roseur</button>
+    <button mat-raised-button class="btn-action" (click)="isBotaniste(true)">Botaniste</button>
+  </div>
+
+  <mat-card *ngIf="choiceUser">
+
     <img src="../../assets/image/logo.png" alt="">
     <mat-card-content>
       <form [formGroup]='loginForm' (ngSubmit)="onSubmitForm()">
@@ -29,10 +36,12 @@
 
       </form>
 
-      <p>Pas encore inscrit ? <span><a routerLink="/register">S'inscrire</a></span></p>
+      <p *ngIf="!isLoginBotaniste">Pas encore inscrit ? <span><a routerLink="/register">S'inscrire</a></span></p>
+      <button mat-raised-button (click)="goBack()">Changer de profil</button>
 
     </mat-card-content>
   </mat-card>
 
 </div>
+
 <router-outlet></router-outlet>

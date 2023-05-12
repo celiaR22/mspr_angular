@@ -5,20 +5,28 @@ import { Plant } from 'src/app/models/plant';
 import { ActivatedRoute } from '@angular/router';
 import { PlantService } from 'src/app/services/plant.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { gestionForm } from 'src/app/share/form/gestionForm';
 
 @Component({
   selector: 'app-add-plant',
   templateUrl: './add-plant.component.html',
   styleUrls: ['./add-plant.component.scss']
 })
-export class AddPlantComponent implements OnInit {
+export class AddPlantComponent extends gestionForm implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private plantService: PlantService, private snackBar: MatSnackBar) { }
+  constructor(private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private plantService: PlantService, private snackBar: MatSnackBar) {
+    super()
+  }
   plantForm: FormGroup;
   plantsArray: Plant[];
   plant: Plant;
+  idPlant: number;
 
-  ngOnInit(): void {
+  superngOnInit(): void {
+  }
+
+  override ngOnInit(): void {
+    this.idPlant = +this.activatedRoute.snapshot.params['id'];
     this.loadData();
     this.createForm()
   }
@@ -36,9 +44,8 @@ export class AddPlantComponent implements OnInit {
   loadData() {
     this.plantService.getPlantByUser(sessionStorage.getItem('currentUser')).subscribe({
       next: (value) => {
-        const plantId = this.activatedRoute.snapshot.params['id'];
         this.plantsArray = value['plant'];
-        this.plant = this.plantsArray.find((plant) => plant.plant_id == plantId)
+        this.plant = this.plantsArray.find((plant) => plant.plant_id == this.idPlant)
         this.createForm();
       },
       error: (error: any) => {
@@ -55,16 +62,51 @@ export class AddPlantComponent implements OnInit {
       name_plant: data.plantName,
       instructions_plant: data.plantInstruction,
       type_plant: data.plantType,
-      status_plant: 'libre',
     }
   }
 
   onSubmitForm() {
-    const data = this.getData(this.plantForm.value);
+    this.errorMessage = [];
+    // on véifie si le form est valid
     if (this.plantForm.valid) {
-      /// si form valid on ajoute dans bdd
-      /// et on redirige vers la page des plantes
-      this.router.navigate(['/plants']);
+      const data = this.getData(this.plantForm.value);
+      /// on va vérifier si c'est un update ou un add ( si update on aura un id dans param de url)
+      if (this.idPlant) {
+        this.plantService.updatePlantByUser(this.idPlant, data).subscribe({
+          next: (value) => {
+            this.router.navigate(['/plants']);
+            this.snackBar.open(value['message'], 'X', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          },
+          error: (error: any) => {
+            this.snackBar.open(error.error.message, 'X', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          },
+        })
+      } else {
+        this.plantService.addPlantByUser(data).subscribe({
+          next: (value) => {
+            this.router.navigate(['/plants']);
+            this.snackBar.open(value['message'], 'X', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          },
+          error: (error: any) => {
+            this.snackBar.open(error.error.message, 'X', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          },
+        })
+      }
+
+    } else {
+      this.getFormErrors(this.plantForm);
     }
   }
 

@@ -1,8 +1,8 @@
-.container {
-    display: flex;
-    max-height: 100vh;
+app-card-plant {
+    flex: 1;
+}
 
-    app-card-plant {
-        flex: 1;
-    }
+h2 {
+    font-size: 2rem;
+    margin: 2rem 0 0 5rem;
 }

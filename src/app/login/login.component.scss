@@ -4,11 +4,21 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 
     .bg {
         width: 50vw;
         height: 100vh;
+    }
+
+    .btn-choice {
+        margin: auto;
+
+        .btn-action {
+            background-color: green;
+            color: white;
+            margin-right: 2rem;
+        }
     }
 }
 
@@ -16,7 +26,7 @@
     @include mat.elevation(8);
     width: 30vw;
     align-self: center;
-    margin-right: 6rem;
+    margin: auto;
 
     img {
         width: 12rem;

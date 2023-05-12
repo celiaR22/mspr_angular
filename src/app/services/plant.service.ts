@@ -9,19 +9,29 @@ import { HttpHeaders } from '@angular/common/http';
 export class PlantService {
 
   constructor(private http: HttpClient) { }
-  token = sessionStorage.getItem('currentUser');
+  token = JSON.parse(sessionStorage.getItem('currentUser'));
 
   getPlantByUser(data: string) {
-    const token = JSON.parse(data);
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token.jwt}`)
+      .set('Authorization', `Bearer ${this.token.jwt}`)
     return this.http.get<Plant>('http://localhost:8082/plant/all', { headers })
   }
 
-  deletePlantById(id: number) {
-    const token = JSON.parse(this.token);
+  addPlantByUser(data: Plant) {
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token.jwt}`)
+      .set('Authorization', `Bearer ${this.token.jwt}`)
+    return this.http.post<Plant>('http://localhost:8082/plant/', data, { headers })
+  }
+
+  updatePlantByUser(idPlant: number, data: Plant) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.jwt}`)
+    return this.http.put<Plant>(`http://localhost:8082/plant/${idPlant}`, data, { headers })
+  }
+
+  deletePlantById(id: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.jwt}`)
     return this.http.delete(`http://localhost:8082/plant/${id}`, { headers })
   }
 }

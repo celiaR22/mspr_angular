@@ -1,4 +1,4 @@
-<div class="plantContainer">
+<div *ngIf="plants" class="plantContainer">
     <mat-card class="example-card" *ngFor="let plant of plants">
         <mat-card-header>
             <mat-card-title>{{plant.name_plant}}</mat-card-title>
@@ -9,7 +9,10 @@
             <p>
                 {{plant.instructions_plant}}
             </p>
-            <button mat-button color="primary">{{plant.status_plant}}</button>
+            <span class="{{ plant.status_plant | statusPlantColor}}">
+                {{plant.status_plant}}
+            </span>
+            <!-- <button mat-button color="primary">{{plant.status_plant}}</button> -->
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary" (click)="updatePlant(plant.plant_id)">Modifier</button>
@@ -17,3 +20,4 @@
         </mat-card-actions>
     </mat-card>
 </div>
+<div *ngIf="!plants">Pas encore de plantes ? ajoutez en une via votre menu latéral</div>

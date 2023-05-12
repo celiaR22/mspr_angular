@@ -8,12 +8,14 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Nom de la plante</mat-label>
                         <input matInput type="text" formControlName="plantName" value="plant.name">
+                        <mat-error *ngIf="errorMessage.plantName">{{errorMessage.plantName}}</mat-error>
                     </mat-form-field>
 
                     <!-- champs type de la plante-->
                     <mat-form-field appearance="outline">
                         <mat-label>Le type de la plante</mat-label>
                         <input matInput type="text" formControlName="plantType">
+                        <mat-error *ngIf="errorMessage.plantType">{{errorMessage.plantType}}</mat-error>
                     </mat-form-field>
 
                     <!-- champs instruction -->
@@ -21,12 +23,16 @@
                         <mat-label>Autosize textarea</mat-label>
                         <textarea formControlName="plantInstruction" matInput cdkTextareaAutosize
                             #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                        <mat-error *ngIf="errorMessage.plantInstruction">{{errorMessage.plantInstruction}}</mat-error>
                     </mat-form-field>
+
+                    <div>
+                        <button mat-raised-button class="btn-action" (click)="onSubmitForm()">Valider</button>
+                        <button type="button" mat-raised-button class="btn-action"
+                            (click)="cancelAction()">Annuler</button>
+                    </div>
                 </form>
-                <div>
-                    <button mat-raised-button class="btn-action" (click)="onSubmitForm()">Valider</button>
-                    <button mat-raised-button class="btn-action" (click)="cancelAction()">Annuler</button>
-                </div>
+
             </mat-card-content>
         </mat-card>
     </div>
