@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Plant } from 'src/app/models/plant';
@@ -21,6 +21,8 @@ export class AddPlantComponent extends gestionForm implements OnInit {
   plantsArray: Plant[];
   plant: Plant;
   idPlant: number;
+  file_store: FileList;
+  file_list: Array<string> = [];
 
   superngOnInit(): void {
   }
@@ -37,7 +39,8 @@ export class AddPlantComponent extends gestionForm implements OnInit {
     this.plantForm = this.fb.group({
       plantName: [this.plant?.name_plant, Validators.required],
       plantType: [this.plant?.type_plant, Validators.required],
-      plantInstruction: [this.plant?.instructions_plant, Validators.required]
+      plantInstruction: [this.plant?.instructions_plant, Validators.required],
+      plantPicture: [this.plant?.picture_plant]
     })
   }
 
@@ -118,6 +121,17 @@ export class AddPlantComponent extends gestionForm implements OnInit {
   getPlantById() {
     const plantId = this.activatedRoute.snapshot.params['id'];
     return this.plantsArray.find((plant) => plant.plant_id == plantId);
+  }
+
+  handleFiles(l: FileList): void {
+    this.file_store = l;
+    if (l.length) {
+      const f = l[0];
+      const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
+      this.plantForm.get('plantPicture').setValue(`${f.name}${count}`);
+    } else {
+      this.plantForm.value.plantPicture.patchValue("");
+    }
   }
 
 }

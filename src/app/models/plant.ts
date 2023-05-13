@@ -4,5 +4,6 @@ export interface Plant {
     plant_id?: number;
     status_plant?: string;
     type_plant: string;
-    user_id?: number
+    user_id?: number;
+    picture_plant?: string
 }

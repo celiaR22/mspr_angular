@@ -1,7 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+@import "global.scss";
+
+* {
     margin: 0;
     padding: 0;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.btn-cancel {
+    border: 1px solid green !important;
+    color: green;
+    margin: 0 0 0 15px !important;
+}

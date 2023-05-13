@@ -25,20 +25,15 @@ export class NavBarComponent implements OnInit {
       icon: 'local_florist',
     },
     {
-      name: 'Ajouter une plante',
-      link: '/add',
-      icon: 'add'
+      name: 'Gardes',
+      link: '/keep',
+      icon: 'dynamic_feed'
     },
     {
       name: 'Mon profil',
       link: '/profil',
       icon: 'person'
-    },
-    // {
-    //   name: 'Se déconnecter',
-    //   link: '/logout',
-    //   icon: 'logout'
-    // }
+    }
   ];
 
   ngOnInit(): void {

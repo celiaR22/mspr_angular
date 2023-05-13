@@ -2,6 +2,7 @@
     <div class="container">
         <mat-card>
             <mat-card-content>
+                <h2>Ajouter une nouvelle plante</h2>
                 <form [formGroup]='plantForm'>
 
                     <!-- champs nom de la plante -->
@@ -11,6 +12,18 @@
                         <mat-error *ngIf="errorMessage.plantName">{{errorMessage.plantName}}</mat-error>
                     </mat-form-field>
 
+                    <!-- champs photo de la plante -->
+                    <div class="picture">
+                        <mat-form-field appearance="fill">
+                            <input type="text" readonly matInput />
+                            <input type="file" hidden #f_input (change)="handleFiles(f_input.files)" />
+                            <button type="button" mat-mini-fab color="primary" (click)="f_input.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <mat-error *ngIf="errorMessage.plantPicture">{{errorMessage.plantPicture}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
                     <!-- champs type de la plante-->
                     <mat-form-field appearance="outline">
                         <mat-label>Le type de la plante</mat-label>
@@ -19,16 +32,17 @@
                     </mat-form-field>
 
                     <!-- champs instruction -->
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="outline">
                         <mat-label>Autosize textarea</mat-label>
                         <textarea formControlName="plantInstruction" matInput cdkTextareaAutosize
-                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
                         <mat-error *ngIf="errorMessage.plantInstruction">{{errorMessage.plantInstruction}}</mat-error>
                     </mat-form-field>
 
                     <div>
-                        <button mat-raised-button class="btn-action" (click)="onSubmitForm()">Valider</button>
-                        <button type="button" mat-raised-button class="btn-action"
+                        <button mat-raised-button class="btn-action" (click)="onSubmitForm()"
+                            color="primary">Valider</button>
+                        <button type="button" mat-raised-button class="btn-cancel"
                             (click)="cancelAction()">Annuler</button>
                     </div>
                 </form>
