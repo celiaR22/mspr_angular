@@ -9,18 +9,21 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends gestionForm implements OnInit {
-
-  constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder, private authService: AuthService) {
-    super()
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
+    super();
   }
   loginForm: FormGroup;
   hide: boolean = true;
 
-  superngOnInit(): void {
-  }
+  superngOnInit(): void {}
 
   override ngOnInit(): void {
     this.createForm();
@@ -28,16 +31,22 @@ export class LoginComponent extends gestionForm implements OnInit {
 
   createForm(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password: ['', Validators.required]
-    })
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
+      password: ['', Validators.required],
+    });
   }
 
   getFormData(data: User): User {
     return {
-      email: data.email,
-      password: data.password
-    }
+      email_user: data.email_user,
+      password_user: data.password_user,
+    };
   }
 
   onSubmitForm() {
@@ -54,12 +63,11 @@ export class LoginComponent extends gestionForm implements OnInit {
           this.snackBar.open(error.error.message, 'X', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-          })
+          });
         },
-      })
+      });
     } else {
       this.getFormErrors(this.loginForm);
     }
   }
-
 }

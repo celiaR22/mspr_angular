@@ -1,10 +1,10 @@
 export interface User {
-  email?: string;
-  password?: string;
-  firstname?: string;
-  lastname?: string;
-  birthdate?: string;
-  phone?: string;
+  email_user?: string;
+  password_user?: string;
+  firstname_user?: string;
+  lastname_user?: string;
+  birthdate_user?: string;
+  phone_user?: string;
 }
 
 export interface UserInformation {

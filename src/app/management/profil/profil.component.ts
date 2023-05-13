@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, UserInformation } from '../../models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -10,28 +10,14 @@ import { UserService } from '../../services/user.service';
 })
 export class ProfilComponent implements OnInit {
   user: User;
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private snackBar: MatSnackBar
+  ) {}
   ngOnInit() {
-    this.userService.getUserByUser().subscribe((value) => {
-      console.log(value);
-    });
-
-    this.profileForm = this.fb.group({
-      firstName: [this.user.firstname, Validators.required],
-      lastName: [this.user.lastname, Validators.required],
-      email: [
-        this.user.email,
-        [
-          Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-        ],
-      ],
-      phone: [
-        this.user.phone,
-        [Validators.required, Validators.pattern('[0][1-9][0-9]{8}')],
-      ],
-      birthdate: [this.user.birthdate, Validators.required],
-    });
+    this.loadData();
+    this.createForm();
   }
 
   profileForm: FormGroup;
@@ -77,10 +63,10 @@ export class ProfilComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.profileForm.value);
     if (this.profileForm.valid) {
       this.isEditMode = false;
       this.profileForm.enable();
+      console.log(this.profileForm.value);
     }
   }
 
@@ -88,15 +74,54 @@ export class ProfilComponent implements OnInit {
     this.isEditMode = false;
     this.profileForm.enable();
   }
+  createForm() {
+    console.log(this.user);
+
+    this.profileForm = this.fb.group({
+      firstname: [this.user?.firstname_user, Validators.required],
+      lastname: [this.user?.lastname_user, Validators.required],
+      email: [
+        this.user?.email_user,
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
+      phone: [
+        this.user?.phone_user,
+        [Validators.required, Validators.pattern('[0][1-9][0-9]{8}')],
+      ],
+      birthdate: [this.user?.birthdate_user, Validators.required],
+    });
+  }
 
   getFormData(data: any): User {
     return {
-      email: data.email,
-      password: data.password,
-      firstname: data.firstname,
-      lastname: data.lastname,
-      birthdate: data.birthdate,
-      phone: data.phoneNumber,
+      email_user: data.email,
+      password_user: data.password,
+      firstname_user: data.firstname,
+      lastname_user: data.lastname,
+      birthdate_user: data.birthdate,
+      phone_user: data.phoneNumber,
     };
+  }
+
+  loadData() {
+    this.userService.getUserByUser().subscribe({
+      next: (value) => {
+        console.log(value['profile']);
+
+        this.user = value['profile'];
+
+        this.createForm();
+      },
+      error: (error: any) => {
+        this.snackBar.open(error.error.message, 'X', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+    });
+    console.log(this.user);
   }
 }

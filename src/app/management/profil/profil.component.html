@@ -2,7 +2,9 @@
   <div class="container">
     <mat-card class="pictureCard">
       <mat-card-header>
-        <mat-card-title>Célia ROJAS</mat-card-title>
+        <mat-card-title
+          >{{ user.firstname_user }} {{ user.lastname_user }}</mat-card-title
+        >
       </mat-card-header>
       <mat-card-content>
         <img img [src]="imageUrl" *ngIf="imageUrl" class="img" />
@@ -40,13 +42,13 @@
           <mat-label>Nom</mat-label>
           <input
             matInput
-            formControlName="firstName"
+            formControlName="firstname"
             [readonly]="!isEditMode"
           />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Prénom</mat-label>
-          <input matInput formControlName="lastName" [readonly]="!isEditMode" />
+          <input matInput formControlName="lastname" [readonly]="!isEditMode" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
