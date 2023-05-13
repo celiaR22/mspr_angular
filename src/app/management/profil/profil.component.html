@@ -1,35 +1,89 @@
 <app-nav-bar>
-    <div class="container">
-        <mat-card class="pictureCard">
-            <mat-card-header>
-                <mat-card-title>Célia ROJAS</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <img *ngIf="!informationsProfil.picture" img src="../../assets/image/avatar.png" alt="">
-                <img *ngIf="informationsProfil.picture" img src="informationsProfil.picture" alt="">
-            </mat-card-content>
-            <button mat-raised-button color="primary">Modifier</button>
-        </mat-card>
-        <mat-card class="informationsCard">
-            <mat-card-header>
-                <mat-card-title>Informations personnelles</mat-card-title>
-            </mat-card-header>
-            <div>
-                <div>
-                    <h3>Nom légal</h3>
-                    <p>{{informationsProfil.lastname}}</p>
-                </div>
-                <button mat-raised-button color="primary">Modifier</button>
-            </div>
-            <mat-divider></mat-divider>
-            <div>
-                <div>
-                    <h3>Email</h3>
-                    <p>{{informationsProfil.email}}</p>
-                </div>
-                <button>Modifier</button>
-            </div>
-            <mat-divider></mat-divider>
-        </mat-card>
-    </div>
+  <div class="container">
+    <mat-card class="pictureCard">
+      <mat-card-header>
+        <mat-card-title>Célia ROJAS</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <img img [src]="imageUrl" *ngIf="imageUrl" class="img" />
+
+        <img *ngIf="" img src="" alt="" />
+      </mat-card-content>
+      <div class="align-items">
+        <button
+          mat-icon-button
+          mat-raised-button
+          matPrefix
+          (click)="f_input.click()"
+        >
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <input
+          type="file"
+          hidden
+          accept=".png,.img"
+          #f_input
+          (change)="onFileSelected($event)"
+        />
+
+        <button mat-stroked-button color="primary" (click)="handleSubmit()">
+          Sauvegarder
+        </button>
+      </div>
+    </mat-card>
+    <mat-card class="profileCard">
+      <mat-card-header>
+        <mat-card-title>Informations personnelles</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input
+            matInput
+            formControlName="firstName"
+            [readonly]="!isEditMode"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="lastName" [readonly]="!isEditMode" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" [readonly]="!isEditMode" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Téléphone</mat-label>
+          <input matInput formControlName="phone" [readonly]="!isEditMode" />
+        </mat-form-field>
+
+        <div *ngIf="isEditMode" class="align-items">
+          <button mat-raised-button color="primary" type="submit">
+            Sauvegarder
+          </button>
+          <br />
+          <br />
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="onCancel()"
+          >
+            Annuler
+          </button>
+        </div>
+
+        <div *ngIf="!isEditMode">
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="onEdit()"
+          >
+            Editer
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </app-nav-bar>

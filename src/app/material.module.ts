@@ -10,7 +10,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import {
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+} from '@angular/material/core';
 import { MY_FORMAT } from './share/date/dateFormat';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
@@ -20,31 +24,30 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-    exports: [
-        BrowserAnimationsModule,
-        LayoutModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatSnackBarModule,
-        MatMenuModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatAutocompleteModule,
-        MatDividerModule,
-        MatSidenavModule,
-        HttpClientModule,
-        MatChipsModule,
-        MatListModule
-    ],
-    providers: [
-        { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-        { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }
-    ],
-
+  exports: [
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatSidenavModule,
+    HttpClientModule,
+    MatChipsModule,
+    MatListModule,
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT },
+  ],
 })
-export class AppMaterialModule { }
+export class AppMaterialModule {}
