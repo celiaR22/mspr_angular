@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeocodingService } from '../../services/geocoding.service';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,16 +15,11 @@ export class SearchBarComponent implements OnInit {
   ) {}
   searchForm: FormGroup;
   filteredOptions;
+  selectedCity: string;
+  citySearchObject;
 
   ngOnInit(): void {
     this.createForm();
-    // this.searchForm.get('firstName').valueChanges
-    // .pipe(
-    //   this.search(value))
-    // )
-    // .subscribe((results: any[]) => {
-    //   console.log(results);
-    // });
   }
 
   createForm() {
@@ -37,7 +33,7 @@ export class SearchBarComponent implements OnInit {
   getData(dataForm: FormGroup) {
     const dataValue = dataForm.value;
     return {
-      localisation: dataValue.localisation,
+      localisation: {},
       startDate: dataValue.startDate,
       endDate: dataValue.endDate,
     };
@@ -45,6 +41,7 @@ export class SearchBarComponent implements OnInit {
 
   submitForm() {
     const data = this.getData(this.searchForm);
+    data.localisation = this.citySearchObject;
     console.log(data);
   }
 
@@ -58,10 +55,16 @@ export class SearchBarComponent implements OnInit {
 
     if (searchOption.length) {
       this.geocodingService.searchLocation(searchOption).subscribe((value) => {
-        console.log(value);
-
         this.filteredOptions = value;
       });
     }
+  }
+
+  onCitySelected(event: MatAutocompleteSelectedEvent): void {
+    const selectedCity = event.option.value;
+    const option = this.filteredOptions.find(
+      (o) => o.display_name === selectedCity
+    );
+    this.citySearchObject = option;
   }
 }
