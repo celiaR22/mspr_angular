@@ -17,13 +17,13 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.searchForm.get('firstName').valueChanges
-    .pipe(
-      this.search(value))
-    )
-    .subscribe((results: any[]) => {
-      console.log(results);
-    });
+    // this.searchForm.get('firstName').valueChanges
+    // .pipe(
+    //   this.search(value))
+    // )
+    // .subscribe((results: any[]) => {
+    //   console.log(results);
+    // });
   }
 
   createForm() {
@@ -45,21 +45,23 @@ export class SearchBarComponent implements OnInit {
 
   submitForm() {
     const data = this.getData(this.searchForm);
-
-    let result = this.geocodingService
-      .searchLocation(data.localisation)
-      .subscribe((value) => {
-        this.filteredOptions = value;
-
-        for (let i = 0; i < this.filteredOptions.length; i++) {
-          const element = this.filteredOptions[i];
-          console.log(element.display_name);
-        }
-      });
+    console.log(data);
   }
 
   /// reinitialise la valeur de l'input date au click sur l'icon X
   resetDate(field: string) {
     this.searchForm.get(field).setValue(null);
+  }
+
+  searchCity(e) {
+    const searchOption = e.target.value;
+
+    if (searchOption.length) {
+      this.geocodingService.searchLocation(searchOption).subscribe((value) => {
+        console.log(value);
+
+        this.filteredOptions = value;
+      });
+    }
   }
 }
