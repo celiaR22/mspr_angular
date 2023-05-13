@@ -11,15 +11,9 @@
       formControlName="localisation"
       (keyup)="searchCity($event)"
     />
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      (optionSelected)="onCitySelected($event)"
-    >
-      <mat-option
-        *ngFor="let option of filteredOptions"
-        [value]="option.display_name"
-      >
-        {{ option.display_name }}
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option [value]="cityName">
+        {{ cityName }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

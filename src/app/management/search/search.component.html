@@ -1,6 +1,6 @@
 <app-nav-bar>
   <div>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (myOutput)="getData($event)"></app-search-bar>
 
     <div
       class="map-container"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeocodingService } from '../../services/geocoding.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -8,7 +8,9 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
+  @Output() myOutput = new EventEmitter<string>();
+
   constructor(
     private fb: FormBuilder,
     private geocodingService: GeocodingService
@@ -17,6 +19,12 @@ export class SearchBarComponent implements OnInit {
   filteredOptions;
   selectedCity: string;
   citySearchObject;
+  cityName;
+  data;
+
+  sendData() {
+    this.myOutput.emit(this.data);
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -40,9 +48,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   submitForm() {
-    const data = this.getData(this.searchForm);
-    data.localisation = this.citySearchObject;
-    console.log(data);
+    this.data = this.getData(this.searchForm);
+    this.data.localisation = this.filteredOptions;
+    this.sendData();
   }
 
   /// reinitialise la valeur de l'input date au click sur l'icon X
@@ -53,18 +61,14 @@ export class SearchBarComponent implements OnInit {
   searchCity(e) {
     const searchOption = e.target.value;
 
-    if (searchOption.length) {
+    if (searchOption.length > 4) {
       this.geocodingService.searchLocation(searchOption).subscribe((value) => {
         this.filteredOptions = value;
+        this.cityName =
+          this.filteredOptions.features[0].properties.city +
+          ' ' +
+          this.filteredOptions.features[0].properties.context;
       });
     }
-  }
-
-  onCitySelected(event: MatAutocompleteSelectedEvent): void {
-    const selectedCity = event.option.value;
-    const option = this.filteredOptions.find(
-      (o) => o.display_name === selectedCity
-    );
-    this.citySearchObject = option;
   }
 }

@@ -6,6 +6,8 @@ import * as Leaflet from 'leaflet';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
+  receivedData;
+
   map!: Leaflet.Map;
   markers: Leaflet.Marker[] = [];
   options = {
@@ -16,34 +18,34 @@ export class SearchComponent {
       }),
     ],
     zoom: 12,
-    center: { lat: 43.65653, lng: 3.904421 },
+    center: { lat: 47.233774, lng: -1.546605 },
   };
-
-  initMarkers() {
-    const initialMarkers = [
-      {
-        position: { lat: 43.616615, lng: 3.844962 },
-        draggable: false,
-      },
-      {
-        position: { lat: 43.604854, lng: 3.886189 },
-        draggable: false,
-      },
-      {
-        position: { lat: 43.598823, lng: 3.848149 },
-        draggable: false,
-      },
-    ];
-    for (let index = 0; index < initialMarkers.length; index++) {
-      const data = initialMarkers[index];
-      const marker = this.generateMarker(data, index);
-      marker
-        .addTo(this.map)
-        .bindPopup(`<b> 3 Plantes à garder chez Jordan.</b>`);
-      this.map.panTo(data.position);
-      this.markers.push(marker);
-    }
-  }
+  ngOnInit() {}
+  // initMarkers() {
+  //   const initialMarkers = [
+  //     {
+  //       position: { lat: 43.616615, lng: 3.844962 },
+  //       draggable: false,
+  //     },
+  //     {
+  //       position: { lat: 43.604854, lng: 3.886189 },
+  //       draggable: false,
+  //     },
+  //     {
+  //       position: { lat: 43.598823, lng: 3.848149 },
+  //       draggable: false,
+  //     },
+  //   ];
+  //   for (let index = 0; index < initialMarkers.length; index++) {
+  //     const data = initialMarkers[index];
+  //     const marker = this.generateMarker(data, index);
+  //     marker
+  //       .addTo(this.map)
+  //       .bindPopup(`<b> 3 Plantes à garder chez Jordan.</b>`);
+  //     this.map.panTo(data.position);
+  //     this.markers.push(marker);
+  //   }
+  // }
 
   generateMarker(data: any, index: number) {
     var greenIcon = Leaflet.icon({
@@ -65,7 +67,7 @@ export class SearchComponent {
 
   onMapReady($event: Leaflet.Map) {
     this.map = $event;
-    this.initMarkers();
+    //this.initMarkers();
   }
 
   mapClicked($event: any) {
@@ -78,5 +80,22 @@ export class SearchComponent {
 
   markerDragEnd($event: any, index: number) {
     // console.log($event.target.getLatLng());
+  }
+  resetMap(data) {
+    if (this.map) {
+      this.receivedData = data;
+      console.log(this.receivedData.localisation.features[0].geometry);
+      this.map.setView(
+        [
+          this.receivedData.localisation.features[0].geometry.coordinates[1],
+          this.receivedData.localisation.features[0].geometry.coordinates[0],
+        ],
+        14
+      );
+    }
+  }
+
+  getData(data) {
+    this.resetMap(data);
   }
 }
