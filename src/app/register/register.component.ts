@@ -10,7 +10,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { gestionForm } from '../share/form/gestionForm';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../models/user';
+import { UserInformation } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { catchError } from 'rxjs';
 
@@ -66,14 +66,14 @@ export class RegisterComponent extends gestionForm implements OnInit {
     });
   }
 
-  getFormData(data: any): User {
+  getFormData(data: any): UserInformation {
     return {
-      email_user: data.email,
-      password_user: data.password,
-      firstname_user: data.firstname,
-      lastname_user: data.lastname,
-      birthdate_user: data.birthdate,
-      phone_user: data.phoneNumber,
+      email: data.email,
+      password: data.password,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      birthdate: data.birthdate,
+      phone: data.phoneNumber,
     };
   }
 

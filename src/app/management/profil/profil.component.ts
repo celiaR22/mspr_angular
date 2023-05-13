@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProfilComponent implements OnInit {
   user: User;
+  userInformation: UserInformation;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -61,12 +62,33 @@ export class ProfilComponent implements OnInit {
     this.isEditMode = true;
     this.profileForm.enable();
   }
-
+  getFormData(data: any): User {
+    return {
+      email_user: data.email,
+      password_user: data.password,
+      firstname_user: data.firstname,
+      lastname_user: data.lastname,
+      birthdate_user: data.birthdate,
+      phone_user: data.phoneNumber,
+    };
+  }
   onSubmit() {
     if (this.profileForm.valid) {
-      this.isEditMode = false;
-      this.profileForm.enable();
-      console.log(this.profileForm.value);
+      const data = this.getFormData(this.profileForm.value);
+      this.userService.updateUser(data).subscribe({
+        next: (value) => {
+          this.user = data;
+          this.isEditMode = false;
+          this.profileForm.enable();
+          console.log(value);
+        },
+        error: (error: any) => {
+          this.snackBar.open(error.error.message, 'X', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        },
+      });
     }
   }
 
@@ -75,8 +97,6 @@ export class ProfilComponent implements OnInit {
     this.profileForm.enable();
   }
   createForm() {
-    console.log(this.user);
-
     this.profileForm = this.fb.group({
       firstname: [this.user?.firstname_user, Validators.required],
       lastname: [this.user?.lastname_user, Validators.required],
@@ -95,23 +115,11 @@ export class ProfilComponent implements OnInit {
     });
   }
 
-  getFormData(data: any): User {
-    return {
-      email_user: data.email,
-      password_user: data.password,
-      firstname_user: data.firstname,
-      lastname_user: data.lastname,
-      birthdate_user: data.birthdate,
-      phone_user: data.phoneNumber,
-    };
-  }
-
   loadData() {
     this.userService.getUserByUser().subscribe({
       next: (value) => {
-        console.log(value['profile']);
-
         this.user = value['profile'];
+        console.log(this.user);
 
         this.createForm();
       },
@@ -122,6 +130,5 @@ export class ProfilComponent implements OnInit {
         });
       },
     });
-    console.log(this.user);
   }
 }

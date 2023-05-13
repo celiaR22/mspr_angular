@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
+import { User, UserInformation } from '../models/user';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -11,8 +11,6 @@ export class UserService {
   token = JSON.parse(sessionStorage.getItem('currentUser'));
 
   getUserByUser() {
-    console.log(this.token);
-
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${this.token.jwt}`

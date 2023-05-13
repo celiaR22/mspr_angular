@@ -1,6 +1,6 @@
 export interface User {
-  email_user?: string;
-  password_user?: string;
+  email_user: string;
+  password_user: string;
   firstname_user?: string;
   lastname_user?: string;
   birthdate_user?: string;
@@ -9,9 +9,10 @@ export interface User {
 
 export interface UserInformation {
   email: string;
-  firstname: string;
-  lastname: string;
-  birthdate: string;
-  phone: string;
+  password: string;
+  firstname?: string;
+  lastname?: string;
+  birthdate?: string;
+  phone?: string;
   picture?: string;
 }
