@@ -15,43 +15,53 @@ export class SearchComponent {
       })
     ],
     zoom: 13,
-    center: { lat: 43.613621, lng: 3.874513 }
+    center: { lat: 43.615621, lng: 3.874578 }
   }
  
  
-  // initMarkers() {
-  //   const initialMarkers = [
-  //     {
-  //       position: { lat: 28.625485, lng: 79.821091 },
-  //       draggable: true
-  //     },
-  //     {
-  //       position: { lat: 28.625293, lng: 79.817926 },
-  //       draggable: false
-  //     },
-  //     {
-  //       position: { lat: 28.625182, lng: 79.81464 },
-  //       draggable: true
-  //     }
-  //   ];
-  //   for (let index = 0; index < initialMarkers.length; index++) {
-  //     const data = initialMarkers[index];
-  //     const marker = this.generateMarker(data, index);
-  //     marker.addTo(this.map).bindPopup(`<b>${data.position.lat},  ${data.position.lng}</b>`);
-  //     this.map.panTo(data.position);
-  //     this.markers.push(marker)
-  //   }
-  // }
+  initMarkers() {
+ 
+    const initialMarkers = [
+      {  
+        position: { lat:43.616615, lng: 3.844962 },
+        draggable: false
+      },
+      {
+        position: { lat:43.604854, lng: 3.886189 },
+        draggable: false
+      },
+      {
+        position: { lat: 43.598823, lng: 3.848149 },
+        draggable: false
+      }
+    ];
+    for (let index = 0; index < initialMarkers.length; index++) {
+      const data = initialMarkers[index];
+      const marker = this.generateMarker(data, index);
+      marker.addTo(this.map).bindPopup(`<b> 3 Plantes à garder chez Jordan.</b>`);
+      this.map.panTo(data.position);
+      this.markers.push(marker)
+    }
+  }
 
-  // generateMarker(data: any, index: number) {
-  //   return Leaflet.marker(data.position, { draggable: data.draggable })
-  //     .on('click', (event) => this.markerClicked(event, index))
-  //     .on('dragend', (event) => this.markerDragEnd(event, index));
-  // }
+  generateMarker(data: any, index: number) {
+    var greenIcon = Leaflet.icon({
+      iconUrl: '../../../assets/image/markeIcon.png',
+  
+      iconSize:     [28, 38], // size of the icon
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+    return Leaflet.marker(data.position, { draggable: data.draggable ,icon:greenIcon})
+      .on('click', (event) => this.markerClicked(event, index))
+      .on('dragend', (event) => this.markerDragEnd(event, index));
+  }
 
   onMapReady($event: Leaflet.Map) {
     this.map = $event;
-    //this.initMarkers();
+    this.initMarkers();
   }
 
   mapClicked($event: any) {
