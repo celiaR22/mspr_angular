@@ -42,21 +42,6 @@ export class ProfilComponent implements OnInit {
   }
 
   handleSubmit(): void {}
-  get firstName() {
-    return this.profileForm.get('firstName');
-  }
-
-  get lastName() {
-    return this.profileForm.get('lastName');
-  }
-
-  get email() {
-    return this.profileForm.get('email');
-  }
-
-  get phone() {
-    return this.profileForm.get('phone');
-  }
 
   onEdit() {
     this.isEditMode = true;
