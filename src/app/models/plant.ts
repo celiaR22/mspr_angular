@@ -1,8 +1,14 @@
 export interface Plant {
-    id: number;
-    user_id: number;
-    name: string;
-    instruction: string;
-    type: string;
-    status: string;
+    instructions_plant: string;
+    name_plant: string;
+    plant_id?: number;
+    status_plant?: string;
+    type_plant: string;
+    user_id?: number;
+    picture_plant?: string
+}
+
+export enum StatusPlant {
+    Disponible = 1,
+    Gader = 2,
 }

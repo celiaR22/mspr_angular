@@ -22,6 +22,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   exports: [
@@ -44,10 +46,12 @@ import { MatListModule } from '@angular/material/list';
     HttpClientModule,
     MatChipsModule,
     MatListModule,
+    MatCheckboxModule,
+    MatSelectModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT },
   ],
 })
-export class AppMaterialModule {}
+export class AppMaterialModule { }

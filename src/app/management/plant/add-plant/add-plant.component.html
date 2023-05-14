@@ -1,0 +1,54 @@
+<app-nav-bar>
+    <div class="container">
+        <mat-card>
+            <mat-card-content>
+                <h2>{{!idPlant ? 'Ajouter une plante' : 'Modifier votre plante'}}</h2>
+                <form [formGroup]='plantForm'>
+
+                    <!-- champs nom de la plante -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nom de la plante</mat-label>
+                        <input matInput type="text" formControlName="plantName" value="plant.name">
+                        <mat-error *ngIf="errorMessage.plantName">{{errorMessage.plantName}}</mat-error>
+                    </mat-form-field>
+
+                    <!-- champs photo de la plante -->
+                    <div class="picture">
+                        <mat-form-field appearance="fill">
+                            <input matInput type="text" formControlName="plantPicture" [readonly]="true">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="onClick($event)" type="button">
+                            <mat-icon>attach_file</mat-icon>
+                            Ajouter une photo
+                        </button>
+                        <input #fileUpload type="file" (change)="onFileSelected($event)" formControlName='test' hidden>
+                        <mat-error *ngIf="errorMessage.plantPicture">{{errorMessage.plantPicture}}</mat-error>
+                    </div>
+
+                    <!-- champs type de la plante-->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Le type de la plante</mat-label>
+                        <input matInput type="text" formControlName="plantType">
+                        <mat-error *ngIf="errorMessage.plantType">{{errorMessage.plantType}}</mat-error>
+                    </mat-form-field>
+
+                    <!-- champs instruction -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vos instructions</mat-label>
+                        <textarea formControlName="plantInstruction" matInput cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
+                        <mat-error *ngIf="errorMessage.plantInstruction">{{errorMessage.plantInstruction}}</mat-error>
+                    </mat-form-field>
+
+                    <div>
+                        <button mat-raised-button class="btn-action" (click)="onSubmitForm()"
+                            color="primary">Valider</button>
+                        <button type="button" mat-raised-button class="btn-cancel"
+                            (click)="cancelAction()">Annuler</button>
+                    </div>
+                </form>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</app-nav-bar>

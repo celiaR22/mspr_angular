@@ -1,0 +1,63 @@
+<app-nav-bar>
+    <div class="container">
+        <mat-card>
+            <mat-card-content>
+                <h2>{{!idKeep ? 'Créer une nouvelle garde' : 'Modifier votre garde'}}</h2>
+                <form [formGroup]='keepForm'>
+
+                    <!-- champs localisation  -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Adresse</mat-label>
+                        <input matInput type="text" formControlName="keepLocalisation">
+                        <mat-error *ngIf="errorMessage.Adresse">{{errorMessage.Adresse}}</mat-error>
+                    </mat-form-field>
+
+                    <!-- champs choix des plantes-->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Choisissez vos plantes</mat-label>
+                        <mat-select formControlName="keepPlants" multiple ngDefaultControl>
+                            <mat-option *ngFor="let plant of plants"
+                                [value]="plant.plant_id">{{plant.name_plant}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- champs date de début-->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date de début</mat-label>
+                        <input matInput [matDatepicker]="keepStartDate" formControlName="keepStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="keepStartDate">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #keepStartDate></mat-datepicker>
+                        <mat-error *ngIf="errorMessage.keepStartDate">{{errorMessage.keepStartDate}}</mat-error>
+                    </mat-form-field>
+
+                    <!-- champs date de fin-->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date de fin</mat-label>
+                        <input matInput [matDatepicker]="keepEndDate" formControlName="keepEndDate">
+                        <mat-datepicker-toggle matSuffix [for]="keepEndDate">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #keepEndDate></mat-datepicker>
+                        <mat-error *ngIf="errorMessage.keepEndDate">{{errorMessage.keepEndDate}}</mat-error>
+                    </mat-form-field>
+
+                    <!-- champs instruction -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vos instructions</mat-label>
+                        <textarea formControlName="keepInstruction" matInput cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
+                        <mat-error *ngIf="errorMessage.plantInstruction">{{errorMessage.plantInstruction}}</mat-error>
+                    </mat-form-field>
+
+                    <div>
+                        <button mat-raised-button class="btn-action" (click)="onSubmitForm()"
+                            color="primary">Valider</button>
+                        <button type="button" mat-raised-button class="btn-cancel"
+                            (click)="cancelAction()">Annuler</button>
+                    </div>
+                </form>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</app-nav-bar>

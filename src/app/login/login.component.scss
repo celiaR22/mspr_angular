@@ -4,11 +4,25 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 
     .bg {
         width: 50vw;
         height: 100vh;
+    }
+
+    .btn-choice {
+        margin: auto;
+
+        .btn-action {
+            background-color: green;
+            color: white;
+            margin-right: 2rem;
+        }
+
+        .btn-botaniste {
+            background-color: brown
+        }
     }
 }
 
@@ -16,13 +30,17 @@
     @include mat.elevation(8);
     width: 30vw;
     align-self: center;
-    margin-right: 6rem;
+    margin: auto;
 
     img {
         width: 12rem;
         height: 8rem;
         margin: 0 auto 2rem auto;
         display: block;
+    }
+
+    .return {
+        cursor: pointer;
     }
 }
 
@@ -36,4 +54,5 @@ form {
         color: white;
         background-color: green;
     }
+
 }

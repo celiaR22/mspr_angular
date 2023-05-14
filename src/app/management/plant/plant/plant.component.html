@@ -1,4 +1,7 @@
 <app-nav-bar>
-    <button> ajouter une plante </button>
+    <h2>Vos plantes</h2>
+    <button mat-raised-button color="primary" class="btn-action" (click)="addPlante()">
+        <mat-icon>add</mat-icon>
+        Ajouter une plante</button>
     <app-card-plant [plants]="plants"></app-card-plant>
 </app-nav-bar>

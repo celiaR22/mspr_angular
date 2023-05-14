@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+
+.mat-card {
+    border-left: 8px solid green;
+    margin: 6rem auto auto auto;
+    @include mat.elevation(8);
+    width: 40rem;
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        .picture {
+            display: flex;
+            justify-content: center;
+
+            .mat-form-field {
+                flex-grow: 1;
+            }
+
+            button {
+                align-self: center;
+            }
+        }
+    }
+}

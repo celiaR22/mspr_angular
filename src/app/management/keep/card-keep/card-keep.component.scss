@@ -8,6 +8,7 @@
     justify-content: flex-start;
 
     .mat-card {
+        cursor: pointer;
         margin: 0 5rem 5rem 0;
         @include mat.elevation(8);
         width: 12rem;

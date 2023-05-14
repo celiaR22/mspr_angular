@@ -15,38 +15,21 @@ export class ProfilComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
+
+  profileForm: FormGroup;
+  isEditMode = false;
+
   ngOnInit() {
     this.loadData();
     this.createForm();
   }
 
-  profileForm: FormGroup;
-  isEditMode = false;
-  file: File;
-  file_store: FileList;
-  file_list: Array<string> = [];
-
-  imageUrl: any = '../../assets/image/avatar.png';
-
-  onFileSelected(event: any) {
-    this.file = event.target.files[0];
-    const reader = new FileReader();
-    console.log(this.file);
-
-    reader.onload = (e: any) => {
-      this.imageUrl = e.target.result;
-    };
-
-    reader.readAsDataURL(this.file);
-  }
-
-  handleSubmit(): void {}
-
   onEdit() {
     this.isEditMode = true;
     this.profileForm.enable();
   }
+
   getFormData(data: any): User {
     return {
       email_user: data.email,
@@ -81,6 +64,7 @@ export class ProfilComponent implements OnInit {
     this.isEditMode = false;
     this.profileForm.enable();
   }
+
   createForm() {
     this.profileForm = this.fb.group({
       firstname: [this.user?.firstname_user, Validators.required],
@@ -104,8 +88,6 @@ export class ProfilComponent implements OnInit {
     this.userService.getUserByUser().subscribe({
       next: (value) => {
         this.user = value['profile'];
-        console.log(this.user);
-
         this.createForm();
       },
       error: (error: any) => {

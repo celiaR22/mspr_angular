@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Plant } from 'src/app/models/plant';
+import { PlantService } from 'src/app/services/plant.service';
 
 @Component({
   selector: 'app-plant',
@@ -8,10 +10,20 @@ import { Plant } from 'src/app/models/plant';
 })
 export class PlantComponent implements OnInit {
 
-  constructor() { }
-  plants: Plant[] = []
+  constructor(private plantService: PlantService, private router: Router) { }
+  plants: Plant[]
 
   ngOnInit(): void {
+    this.loadData();
   }
 
+  loadData() {
+    this.plantService.getPlantByUser(sessionStorage.getItem('currentUser')).subscribe((value) => {
+      this.plants = value['plants'];
+    })
+  }
+
+  addPlante() {
+    this.router.navigate([`add`]);
+  }
 }
