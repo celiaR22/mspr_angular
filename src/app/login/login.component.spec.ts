@@ -6,6 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
+/**Les tests comprennent
+ * 
+ * La création du composant LoginComponent
+La création du formulaire de connexion
+La fonction isBotaniste qui change la valeur de la propriété isLoginBotaniste
+La fonction goBack qui change la valeur de la propriété choiceUser
+La gestion des erreurs lors de la tentative de connexion avec AuthService et l'affichage des messages d'erreur avec MatSnackBar.
+Les tests utilisent des fonctions expect pour vérifier si les résultats obtenus correspondent aux résultats attendus. */
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
