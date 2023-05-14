@@ -81,9 +81,7 @@ export class RegisterComponent extends gestionForm implements OnInit {
     if (this.registerForm.valid) {
       const data = this.getFormData(this.registerForm.value);
       this.authService.signup(data).subscribe({
-        next: (value) => {
-          console.log(value);
-        },
+        next: (value) => {},
         error: (error: any) => {
           this.snackBar.open(error.error.message, 'X', {
             horizontalPosition: 'center',

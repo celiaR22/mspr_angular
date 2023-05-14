@@ -14,6 +14,7 @@ import { KeepComponent } from '../management/keep/keep.component';
 import { AddKeepComponent } from '../management/keep/add-keep/add-keep.component';
 import { CardKeepComponent } from '../management/keep/card-keep/card-keep.component';
 import { FrenchDatePipe } from '../share/pipe/date-format.pipe';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 const managementRoutes: Routes = [
   { path: 'plants', component: PlantComponent, canActivate: [AuthGuard] },
@@ -43,6 +44,7 @@ const managementRoutes: Routes = [
   imports: [
     CommonModule,
     AppMaterialModule,
+    LeafletModule,
     RouterModule.forChild(managementRoutes)
   ]
 })

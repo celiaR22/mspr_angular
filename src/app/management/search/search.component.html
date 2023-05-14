@@ -1,6 +1,13 @@
 <app-nav-bar>
-    <div class="container">
-        <app-search-bar></app-search-bar>
-        <div> tu peux mettre la map ici max</div>
-    </div>
+  <div>
+    <app-search-bar (myOutput)="getData($event)"></app-search-bar>
+
+    <div
+      class="map-container"
+      leaflet
+      [leafletOptions]="options"
+      (leafletMapReady)="onMapReady($event)"
+      (leafletClick)="mapClicked($event)"
+    ></div>
+  </div>
 </app-nav-bar>

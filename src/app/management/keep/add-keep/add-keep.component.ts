@@ -49,15 +49,22 @@ export class AddKeepComponent extends gestionForm implements OnInit {
   }
 
   loadData() {
-    const source = [
-      this.plantService.getPlantByUser(),
-      this.keepService.getKeepById(this.idKeep)
-    ]
-    forkJoin(source).subscribe((response) => {
-      this.plants = response[0]['plants'];
-      this.keep = response[1]['keep']
-      this.createForm();
-    })
+    if (this.idKeep) {
+      const source = [
+        this.plantService.getPlantByUser(),
+        this.keepService.getKeepById(this.idKeep)
+      ]
+      forkJoin(source).subscribe((response) => {
+        this.plants = response[0]['plants'];
+        this.keep = response[1]['keep']
+        this.createForm();
+      })
+    } else {
+      this.plantService.getPlantByUser().subscribe((value) => {
+        this.plants = value['plants']
+      })
+    }
+
   }
 
   cancelAction() {
@@ -106,11 +113,16 @@ export class AddKeepComponent extends gestionForm implements OnInit {
   }
 
   getPlantsSelectedId() {
-    const arrayPlantsId = []
-    this.keep.plants.forEach((plant) => {
-      arrayPlantsId.push(plant['plant_id'])
-    })
-    return arrayPlantsId;
+    if (this.idKeep) {
+      const arrayPlantsId = []
+      this.keep.plants.forEach((plant) => {
+        arrayPlantsId.push(plant['plant_id'])
+      })
+      return arrayPlantsId;
+    } else {
+      return []
+    }
+
   }
 
 }
