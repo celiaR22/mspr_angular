@@ -7,8 +7,3 @@ export interface Plant {
     user_id?: number;
     picture_plant?: string
 }
-
-export enum StatusPlant {
-    Disponible = 1,
-    Gader = 2,
-}

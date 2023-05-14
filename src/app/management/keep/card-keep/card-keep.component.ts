@@ -16,7 +16,7 @@ export class CardKeepComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  detailKeep(idKeep: number) {
+  updateKeep(idKeep: number) {
     this.router.navigate([`keep/${idKeep}`]);
   }
 

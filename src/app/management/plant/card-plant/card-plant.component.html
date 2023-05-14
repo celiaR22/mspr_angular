@@ -4,17 +4,16 @@
             <mat-card-title>{{plant.name_plant | titlecase}}</mat-card-title>
             <mat-card-subtitle>{{plant.type_plant | uppercase}}</mat-card-subtitle>
         </mat-card-header>
-        <!-- <img mat-card-image src="../../../assets/image/avatar.png" alt="{{plant.name}}"> -->
+        <img mat-card-image src="../../../assets/image/avatar.png" alt="">
         <mat-card-content>
             <p>
                 {{plant.instructions_plant}}
             </p>
-            <!-- <span class="{{ plant.status_plant | statusPlantColor}}">
-            </span> -->
+            <p>{{plant.status_plant | titlecase}}</p>
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary" (click)="updatePlant(plant.plant_id)">Modifier</button>
-            <button mat-raised-button color="warn" (click)="deletePlantById(plant)">Supprimer</button>
+            <button mat-raised-button class="deletebtn" (click)="deletePlantById(plant)">Supprimer</button>
         </mat-card-actions>
     </mat-card>
 </div>

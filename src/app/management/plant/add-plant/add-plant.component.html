@@ -21,7 +21,7 @@
                             <mat-icon>attach_file</mat-icon>
                             Ajouter une photo
                         </button>
-                        <input #fileUpload type="file" (change)="onFileSelected($event)" formControlName='test' hidden>
+                        <input #fileUpload type="file" (change)="onFileSelected($event)" hidden>
                         <mat-error *ngIf="errorMessage.plantPicture">{{errorMessage.plantPicture}}</mat-error>
                     </div>
 

@@ -14,7 +14,6 @@ import { KeepComponent } from '../management/keep/keep.component';
 import { AddKeepComponent } from '../management/keep/add-keep/add-keep.component';
 import { CardKeepComponent } from '../management/keep/card-keep/card-keep.component';
 import { FrenchDatePipe } from '../share/pipe/date-format.pipe';
-import { DetailKeepComponent } from '../management/keep/detail-keep/detail-keep.component';
 
 const managementRoutes: Routes = [
   { path: 'plants', component: PlantComponent, canActivate: [AuthGuard] },
@@ -22,7 +21,7 @@ const managementRoutes: Routes = [
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
   { path: 'keeps', component: KeepComponent, canActivate: [AuthGuard] },
   { path: 'plant/:id', component: AddPlantComponent, canActivate: [AuthGuard] },
-  { path: 'keep/:id', component: DetailKeepComponent, canActivate: [AuthGuard] },
+  { path: 'keep/:id', component: AddKeepComponent, canActivate: [AuthGuard] },
   { path: 'add', component: AddPlantComponent, canActivate: [AuthGuard] },
   { path: 'addKeep', component: AddKeepComponent, canActivate: [AuthGuard] },
 ]
@@ -40,7 +39,6 @@ const managementRoutes: Routes = [
     AddKeepComponent,
     CardKeepComponent,
     FrenchDatePipe,
-    DetailKeepComponent
   ],
   imports: [
     CommonModule,

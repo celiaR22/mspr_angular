@@ -7,6 +7,7 @@ import { Plant } from 'src/app/models/plant';
 import { KeepService } from 'src/app/services/keep.service';
 import { PlantService } from 'src/app/services/plant.service';
 import { gestionForm } from 'src/app/share/form/gestionForm';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-keep',
@@ -26,28 +27,36 @@ export class AddKeepComponent extends gestionForm implements OnInit {
   keepForm: FormGroup;
   idKeep: number;
   plants: Plant[]
+  keep: Keep;
 
   superngOnInit(): void {
   }
 
   override ngOnInit(): void {
+    this.idKeep = this.activatedRoute.snapshot.params['id'];
     this.loadData();
     this.createForm()
   }
 
   createForm() {
     this.keepForm = this.fb.group({
-      keepLocalisation: ['', Validators.required],
-      keepPlants: [[''], Validators.required],
-      keepStartDate: ['', Validators.required],
-      keepEndDate: ['', Validators.required],
-      keepInstruction: ['', Validators.required]
+      keepLocalisation: [this.keep?.location_id, Validators.required],
+      keepPlants: [this.keep?.plants ? this.getPlantsSelectedId() : [''], Validators.required],
+      keepStartDate: [this.keep?.start_date_keep, Validators.required],
+      keepEndDate: [this.keep?.end_date_keep, Validators.required],
+      keepInstruction: [this.keep?.instruction_keep, Validators.required]
     })
   }
 
   loadData() {
-    this.plantService.getPlantByUser(sessionStorage.getItem('currentUser')).subscribe((value) => {
-      this.plants = value['plants'];
+    const source = [
+      this.plantService.getPlantByUser(),
+      this.keepService.getKeepById(this.idKeep)
+    ]
+    forkJoin(source).subscribe((response) => {
+      this.plants = response[0]['plants'];
+      this.keep = response[1]['keep']
+      this.createForm();
     })
   }
 
@@ -94,6 +103,14 @@ export class AddKeepComponent extends gestionForm implements OnInit {
     } else {
       this.getFormErrors(this.keepForm);
     }
+  }
+
+  getPlantsSelectedId() {
+    const arrayPlantsId = []
+    this.keep.plants.forEach((plant) => {
+      arrayPlantsId.push(plant['plant_id'])
+    })
+    return arrayPlantsId;
   }
 
 }

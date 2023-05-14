@@ -11,7 +11,13 @@ export class PlantService {
   constructor(private http: HttpClient) { }
   token = JSON.parse(sessionStorage.getItem('currentUser'));
 
-  getPlantByUser(data: string) {
+  getPlantById(idPlant: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.jwt}`)
+    return this.http.get(`http://localhost:8082/plant/${idPlant}`, { headers })
+  }
+
+  getPlantByUser() {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.token.jwt}`)
     return this.http.get<Plant>('http://localhost:8082/plant/all', { headers })

@@ -42,12 +42,11 @@ export class AddPlantComponent extends gestionForm implements OnInit {
       plantType: [this.plant?.type_plant, Validators.required],
       plantInstruction: [this.plant?.instructions_plant, Validators.required],
       plantPicture: [this.plant?.picture_plant, Validators.required],
-      test: ['', Validators.required]
     })
   }
 
   loadData() {
-    this.plantService.getPlantByUser(sessionStorage.getItem('currentUser')).subscribe({
+    this.plantService.getPlantByUser().subscribe({
       next: (value) => {
         this.plantsArray = value['plants'];
         this.plant = this.plantsArray.find((plant) => plant.plant_id == this.idPlant)

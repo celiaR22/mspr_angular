@@ -9,4 +9,5 @@ export interface Keep {
     status_keep?: string;
     instruction_keep?: string;
     plants?: [];
+    plantsNames?: string[]
 }

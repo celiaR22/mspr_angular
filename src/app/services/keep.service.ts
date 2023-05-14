@@ -22,4 +22,16 @@ export class KeepService {
       .set('Authorization', `Bearer ${this.token.jwt}`)
     return this.http.post<Keep>('http://localhost:8082/keep/', data, { headers })
   }
+
+  getKeepById(idKeep: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.jwt}`)
+    return this.http.get<Keep>(`http://localhost:8082/keep/${idKeep}`, { headers })
+  }
+
+  getLocations() {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.jwt}`)
+    return this.http.get<Keep>(`http://localhost:8082/locations`, { headers })
+  }
 }

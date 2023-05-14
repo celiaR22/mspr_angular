@@ -11,10 +11,23 @@
         cursor: pointer;
         margin: 0 5rem 5rem 0;
         @include mat.elevation(8);
-        width: 12rem;
+        width: 18rem;
 
         .mat-card-image {
             background-size: cover;
+        }
+
+        .delete {
+            border: 1px solid red;
+            color: red
+        }
+
+        .localisation {
+            font-weight: 800;
+        }
+
+        .date {
+            font-weight: 300;
         }
     }
 }

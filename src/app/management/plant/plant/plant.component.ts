@@ -18,7 +18,7 @@ export class PlantComponent implements OnInit {
   }
 
   loadData() {
-    this.plantService.getPlantByUser(sessionStorage.getItem('currentUser')).subscribe((value) => {
+    this.plantService.getPlantByUser().subscribe((value) => {
       this.plants = value['plants'];
     })
   }
