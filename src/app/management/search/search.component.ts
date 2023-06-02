@@ -20,32 +20,45 @@ export class SearchComponent {
     zoom: 12,
     center: { lat: 47.233774, lng: -1.546605 },
   };
-  ngOnInit() {}
-  // initMarkers() {
-  //   const initialMarkers = [
-  //     {
-  //       position: { lat: 43.616615, lng: 3.844962 },
-  //       draggable: false,
-  //     },
-  //     {
-  //       position: { lat: 43.604854, lng: 3.886189 },
-  //       draggable: false,
-  //     },
-  //     {
-  //       position: { lat: 43.598823, lng: 3.848149 },
-  //       draggable: false,
-  //     },
-  //   ];
-  //   for (let index = 0; index < initialMarkers.length; index++) {
-  //     const data = initialMarkers[index];
-  //     const marker = this.generateMarker(data, index);
-  //     marker
-  //       .addTo(this.map)
-  //       .bindPopup(`<b> 3 Plantes à garder chez Jordan.</b>`);
-  //     this.map.panTo(data.position);
-  //     this.markers.push(marker);
-  //   }
-  // }
+  ngOnInit() { }
+  initMarkers() {
+    const initialMarkers = [
+      {
+        position: { lat: 43.616615, lng: 3.844962 },
+        draggable: false,
+      },
+      {
+        position: { lat: 43.604854, lng: 3.886189 },
+        draggable: false,
+      },
+      {
+        position: { lat: 43.598823, lng: 3.848149 },
+        draggable: false,
+      },
+    ];
+    for (let index = 0; index < initialMarkers.length; index++) {
+      const data = initialMarkers[index];
+      const marker = this.generateMarker(data, index);
+      marker
+        .addTo(this.map)
+        .bindPopup(` <mat-card class="example-card" *ngFor="let keep of keeps">
+        <img mat-card-image src="../../../../assets/image/plante1.jpg" width="50px" heigth="50px">
+        <img mat-card-image src="../../../../assets/image/plante2.jpg" width="50px" heigth="50px">
+        <img mat-card-image src="../../../../assets/image/plante2.jpg" width="50px" heigth="50px">
+        <mat-card-content>
+            <p class="localisation">Marché saint clément, Montpellier</p>
+            <p class="date">15 mai 2023 - 09 mai 2023</p>
+            <div>
+                3 plantes à garder.
+                Arrosé matin et soir
+            </div>
+
+        </mat-card-content>
+    </mat-card>`);
+      this.map.panTo(data.position);
+      this.markers.push(marker);
+    }
+  }
 
   generateMarker(data: any, index: number) {
     var greenIcon = Leaflet.icon({
@@ -67,7 +80,7 @@ export class SearchComponent {
 
   onMapReady($event: Leaflet.Map) {
     this.map = $event;
-    //this.initMarkers();
+    this.initMarkers();
   }
 
   mapClicked($event: any) {
