@@ -1,0 +1,29 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-text {
+    color: white;
+    font-size: 14px;
+    margin: 0 10px;
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.footer-divider {
+    background-color: white;
+    width: 1px;
+    height: 12px;
+    margin: 0 5px;
+}

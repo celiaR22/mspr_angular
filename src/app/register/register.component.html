@@ -80,9 +80,17 @@
           </mat-form-field>
         </div>
 
+        <div class="checkbox">
+          <mat-checkbox formControlName="cgu">J'accepte les <a routerLink="../cgu">conditions générale
+              d'utilisation</a></mat-checkbox>
+          <mat-checkbox>J'accepte de revevoir des offres promotionnelles par email</mat-checkbox>
+        </div>
+
         <button mat-raised-button class="btn-action">S'inscrire</button>
 
       </form>
     </mat-card-content>
   </mat-card>
 </div>
+
+<app-footer></app-footer>

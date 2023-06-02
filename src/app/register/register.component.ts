@@ -31,7 +31,7 @@ export class RegisterComponent extends gestionForm implements OnInit {
   hide: boolean = true;
   registerForm: FormGroup;
 
-  superngOnInit(): void {}
+  superngOnInit(): void { }
 
   override ngOnInit(): void {
     this.createForm();
@@ -63,6 +63,7 @@ export class RegisterComponent extends gestionForm implements OnInit {
         [Validators.required, Validators.pattern('[0][1-9][0-9]{8}')],
       ],
       birthdate: ['', [Validators.required]],
+      cgu: ['']
     });
   }
 
@@ -79,16 +80,23 @@ export class RegisterComponent extends gestionForm implements OnInit {
 
   onSubmitForm() {
     if (this.registerForm.valid) {
-      const data = this.getFormData(this.registerForm.value);
-      this.authService.signup(data).subscribe({
-        next: (value) => {},
-        error: (error: any) => {
-          this.snackBar.open(error.error.message, 'X', {
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-        },
-      });
+      if (!this.registerForm.value.cgu) {
+        this.snackBar.open('Vous devez valider les conditions générale d\'utilisation', 'X', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      } else {
+        const data = this.getFormData(this.registerForm.value);
+        this.authService.signup(data).subscribe({
+          next: (value) => { },
+          error: (error: any) => {
+            this.snackBar.open(error.error.message, 'X', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+          },
+        });
+      }
     } else {
       this.getFormErrors(this.registerForm);
     }

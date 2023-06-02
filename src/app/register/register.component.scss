@@ -46,4 +46,9 @@ form {
             margin-right: 10px;
         }
     }
+
+    .checkbox {
+        display: flex;
+        flex-direction: column;
+    }
 }

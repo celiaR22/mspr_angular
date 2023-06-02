@@ -1,0 +1,7 @@
+@use '@angular/material' as mat;
+
+.mat-card {
+    @include mat.elevation(8);
+    width: 80%;
+    margin: 2em auto auto auto;
+}

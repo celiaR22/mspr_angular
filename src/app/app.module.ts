@@ -7,6 +7,8 @@ import { RegisterComponent } from './register/register.component';
 import { AppMaterialModule } from './material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ManagementModule } from './management/management.module';
+import { CguComponent } from './cgu/cgu.component';
+import { FooterComponent } from './share/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { ManagementModule } from './management/management.module';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
+    CguComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
