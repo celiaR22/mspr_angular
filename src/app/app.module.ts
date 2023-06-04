@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ManagementModule } from './management/management.module';
 import { CguComponent } from './cgu/cgu.component';
 import { FooterComponent } from './share/footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FooterComponent } from './share/footer/footer.component';
     PageNotFoundComponent,
     CguComponent,
     FooterComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

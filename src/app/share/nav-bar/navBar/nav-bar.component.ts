@@ -36,6 +36,21 @@ export class NavBarComponent implements OnInit {
     }
   ];
 
+  navigationsFooter: NavBar[] = [
+    {
+      name: 'Contact',
+      link: '/contact',
+    },
+    {
+      name: 'Conditions générales d\'utilisations',
+      link: '/cgu',
+    },
+    {
+      name: 'Politique de confidentialitée',
+      link: '/politique',
+    },
+  ];
+
   ngOnInit(): void {
   }
 

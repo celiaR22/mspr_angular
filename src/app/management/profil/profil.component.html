@@ -31,14 +31,31 @@
               Annuler
             </button>
           </div>
-
-          <div *ngIf="!isEditMode">
-            <button mat-raised-button color="primary" type="button" (click)="onEdit()">
-              Modifier
-            </button>
-          </div>
         </form>
       </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>Paramètres</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-checkbox>J'accepte de recevoir des notifications
+          relatives à mon compte et aux réservations.</mat-checkbox>
+        <mat-checkbox>J'accepte de partager mes préférences et
+          mes intérêts afin d'améliorer l'expérience utilisateur.</mat-checkbox>
+        <mat-checkbox>J'accepte que mes informations de base
+          (nom, prénom) soient partagées avec les hôtes lorsque
+          j'effectue une réservation.</mat-checkbox>
+        <mat-checkbox>J'accepte que mes données anonymisées
+          soient utilisées à des fins d'analyse statistique afin
+          d'améliorer le service.</mat-checkbox>
+        <mat-checkbox>J'accepte de recevoir des
+          communications marketing et des offres spéciales par e-mail.</mat-checkbox>
+      </mat-card-content>
+      <div *ngIf="!isEditMode">
+        <button mat-raised-button color="primary" type="button" (click)="onEdit()">
+          Modifier
+        </button>
+      </div>
     </mat-card>
+
   </div>
 </app-nav-bar>

@@ -1,0 +1,39 @@
+<div class="container">
+    <mat-card class="mailCard">
+        <mat-card-header>
+            <mat-card-title>Nous contacter</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="mailForm" (ngSubmit)="onSubmit()" *ngIf="!isEmailSend">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="firstname" />
+                    <mat-error *ngIf="errorMessage.firstname">{{errorMessage.firstname}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="lastname" />
+                    <mat-error *ngIf="errorMessage.lastname">{{errorMessage.lastname}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" />
+                    <mat-error *ngIf="errorMessage.email">{{errorMessage.email}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Message</mat-label>
+                    <textarea formControlName="message" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
+                    <mat-error *ngIf="errorMessage.message">{{errorMessage.message}}</mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary">
+                    Envoyer
+                </button>
+            </form>
+            <div *ngIf="isEmailSend">Votre message a bien été envoyé, nous vous répondrons dans les meilleurs délais
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<app-footer></app-footer>

@@ -1,5 +1,5 @@
-export interface NavBar{
+export interface NavBar {
     name: string;
     link: string;
-    icon: string
+    icon?: string
 }

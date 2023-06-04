@@ -29,6 +29,14 @@
                     <mat-divider></mat-divider>
                 </a>
             </mat-nav-list>
+            <mat-nav-list>
+                <a *ngFor="let item of navigationsFooter" mat-list-item routerLink="{{item.link}}"
+                    routerLinkActive="List-item-active">
+                    {{item.name}}
+                    <mat-divider></mat-divider>
+                </a>
+            </mat-nav-list>
+
         </mat-sidenav>
 
         <mat-sidenav-content>

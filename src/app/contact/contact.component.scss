@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+
+.container {
+    margin: 2rem auto auto auto;
+    display: flex;
+    justify-content: space-evenly;
+
+    .mat-card {
+        @include mat.elevation(8);
+        border-left: 6px solid green
+    }
+
+    .pictureCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        width: 20rem;
+
+        .mat-card-title {
+            text-align: center;
+        }
+
+        .mat-card-content {
+            display: flex;
+            justify-content: center;
+
+            img {
+                margin: 3rem auto 2rem auto;
+                border-radius: 50%;
+                text-align: center;
+                max-width: 20rem;
+                max-height: 40rem;
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 2rem 0 2rem 0;
+    }
+
+    mat-form-field {
+        width: 70%;
+    }
+
+    .mailCard {
+        width: 60%;
+        height: 100%;
+    }
+}
+
+.align-items {
+    display: flex;
+    flex-direction: row;
+
+    button {
+        margin: 0 0.5rem 0 0;
+    }
+}
