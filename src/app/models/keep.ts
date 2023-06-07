@@ -1,7 +1,8 @@
 export interface Keep {
     keep_id?: number;
     user_id?: number;
-    city?;
+    city?: string;
+    location?;
     location_id?: number;
     use_user_id?: number;
     start_date_keep?: string;

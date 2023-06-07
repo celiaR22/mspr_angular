@@ -16,6 +16,8 @@ import { CardKeepComponent } from '../management/keep/card-keep/card-keep.compon
 import { FrenchDatePipe } from '../share/pipe/date-format.pipe';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { FooterComponent } from '../share/footer/footer.component';
+import { NotificationComponent } from './notification/notification.component';
+import { MessageComponent } from './message/message.component';
 
 const managementRoutes: Routes = [
   { path: 'plants', component: PlantComponent, canActivate: [AuthGuard] },
@@ -26,6 +28,8 @@ const managementRoutes: Routes = [
   { path: 'keep/:id', component: AddKeepComponent, canActivate: [AuthGuard] },
   { path: 'add', component: AddPlantComponent, canActivate: [AuthGuard] },
   { path: 'addKeep', component: AddKeepComponent, canActivate: [AuthGuard] },
+  { path: 'notification', component: NotificationComponent, canActivate: [AuthGuard] },
+  { path: 'message', component: MessageComponent, canActivate: [AuthGuard] },
 ]
 
 @NgModule({
@@ -41,6 +45,8 @@ const managementRoutes: Routes = [
     AddKeepComponent,
     CardKeepComponent,
     FrenchDatePipe,
+    NotificationComponent,
+    MessageComponent,
   ],
   imports: [
     CommonModule,

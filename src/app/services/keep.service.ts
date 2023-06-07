@@ -34,4 +34,5 @@ export class KeepService {
       .set('Authorization', `Bearer ${this.token.jwt}`)
     return this.http.get<Keep>(`http://localhost:8082/locations`, { headers })
   }
+
 }

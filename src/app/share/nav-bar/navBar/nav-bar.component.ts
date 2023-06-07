@@ -33,6 +33,16 @@ export class NavBarComponent implements OnInit {
       name: 'Mon profil',
       link: '/profil',
       icon: 'person'
+    },
+    {
+      name: 'Notification',
+      link: '/notification',
+      icon: 'notifications'
+    },
+    {
+      name: 'Message',
+      link: '/message',
+      icon: 'chat'
     }
   ];
 

@@ -34,6 +34,7 @@ export class KeepComponent implements OnInit {
       this.locations = response[1]['locations']
       this.plants = response[2]['plants'];
       this.getCityNameByKeep();
+
     })
   }
 
