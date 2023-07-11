@@ -22,7 +22,7 @@ import { MessageComponent } from './message/message.component';
 const managementRoutes: Routes = [
   { path: 'plants', component: PlantComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
-  { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+  { path: 'search', component: SearchComponent },
   { path: 'keeps', component: KeepComponent, canActivate: [AuthGuard] },
   { path: 'plant/:id', component: AddPlantComponent, canActivate: [AuthGuard] },
   { path: 'keep/:id', component: AddKeepComponent, canActivate: [AuthGuard] },
@@ -53,6 +53,7 @@ const managementRoutes: Routes = [
     AppMaterialModule,
     LeafletModule,
     RouterModule.forChild(managementRoutes)
-  ]
+  ],
+  providers: [FrenchDatePipe]
 })
 export class ManagementModule { }

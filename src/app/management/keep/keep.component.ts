@@ -45,7 +45,9 @@ export class KeepComponent implements OnInit {
   getCityNameByKeep() {
     this.keeps.map((keep) => {
       const city = this.locations.filter((location) => location.address_id == keep.location_id)
-      keep.city = city[0].city
+      keep.location = {
+        city: city[0].city
+      }
     })
   }
 

@@ -35,4 +35,19 @@ export class KeepService {
     return this.http.get<Keep>(`http://localhost:8082/locations`, { headers })
   }
 
+  getAllKeppExceptUserCo() {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.jwt}`)
+    return this.http.get<Keep>(`http://localhost:8082/keep/all/except`, { headers })
+  }
+
+  applyToKeep(idKeepToApply: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.token.jwt}`
+    );
+    return this.http.put<Keep>(`http://localhost:8082/keep/apply/${idKeepToApply}`, { headers })
+
+  }
+
 }

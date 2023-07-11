@@ -63,7 +63,8 @@ export class RegisterComponent extends gestionForm implements OnInit {
         [Validators.required, Validators.pattern('[0][1-9][0-9]{8}')],
       ],
       birthdate: ['', [Validators.required]],
-      cgu: ['']
+      cgu: [''],
+      newsletter: [''],
     });
   }
 
@@ -75,6 +76,8 @@ export class RegisterComponent extends gestionForm implements OnInit {
       lastname: data.lastname,
       birthdate: data.birthdate,
       phone: data.phoneNumber,
+      cgu: data.cgu ? 'true' : 'false',
+      newsletter: data.newsletter ? 'true' : 'false',
     };
   }
 

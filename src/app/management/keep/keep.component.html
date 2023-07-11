@@ -1,7 +1,12 @@
 <app-nav-bar>
-    <h2>Vos demandes de gardes</h2>
-    <button mat-raised-button color="primary" class="btn-action" (click)="addKeep()">
-        <mat-icon>add</mat-icon>
-        Créer une garde</button>
-    <app-card-keep [keeps]="keeps"></app-card-keep>
+    <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
+        <mat-tab label="Vos demandes de gardes">
+            <button mat-raised-button color="primary" class="btn-action" (click)="addKeep()">
+                <mat-icon>add</mat-icon>
+                Créer une garde</button>
+            <app-card-keep [keeps]="keeps"></app-card-keep>
+        </mat-tab>
+        <mat-tab label="Vos gardes réservées">Content 2</mat-tab>
+    </mat-tab-group>
+
 </app-nav-bar>

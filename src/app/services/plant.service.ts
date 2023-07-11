@@ -19,7 +19,7 @@ export class PlantService {
   getPlantByUser() {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.token.jwt}`)
-    return this.http.get<Plant>('http://localhost:8082/plant/all', { headers })
+    return this.http.get<Plant>('http://localhost:8082/plant/user/all', { headers })
   }
 
   addPlantByUser(data: Plant) {

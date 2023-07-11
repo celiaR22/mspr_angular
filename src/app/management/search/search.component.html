@@ -1,8 +1,25 @@
 <app-nav-bar>
-  <div>
+  <div class="search">
     <app-search-bar (myOutput)="getData($event)"></app-search-bar>
+  </div>
+  <!-- <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
+    <mat-tab label="Map">
 
+      <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
+        (leafletClick)="mapClicked($event)"></div>
+    </mat-tab>
+    <mat-tab label="List">Content 2</mat-tab>
+  </mat-tab-group>
+ -->
+  <section>
+    <div class="listSearch">
+      <div>
+        <app-card-keep [keeps]="keeps"></app-card-keep>
+      </div>
+    </div>
     <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
       (leafletClick)="mapClicked($event)"></div>
-  </div>
+  </section>
+
+
 </app-nav-bar>

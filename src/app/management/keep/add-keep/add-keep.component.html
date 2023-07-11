@@ -43,7 +43,7 @@
 
                     <!-- champs instruction -->
                     <mat-form-field appearance="outline">
-                        <mat-label>Vos instructions</mat-label>
+                        <mat-label>Instructions</mat-label>
                         <textarea formControlName="keepInstruction" matInput cdkTextareaAutosize
                             #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
                         <mat-error *ngIf="errorMessage.plantInstruction">{{errorMessage.plantInstruction}}</mat-error>

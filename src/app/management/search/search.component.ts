@@ -1,15 +1,18 @@
+
 import { Component } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { forkJoin } from 'rxjs';
 import { Keep } from 'src/app/models/keep';
 import { KeepService } from 'src/app/services/keep.service';
+import { FrenchDatePipe } from 'src/app/share/pipe/date-format.pipe';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  constructor(private keepService: KeepService) { }
+  constructor(private keepService: KeepService, private frenchDatePipe: FrenchDatePipe, private changeDetectorRef: ChangeDetectorRef) { }
   receivedData;
   keeps: Keep[];
   locations;
@@ -25,10 +28,10 @@ export class SearchComponent {
     zoom: 12,
     center: { lat: 47.233774, lng: -1.546605 },
   };
+  displayKeep: Boolean = false;
 
   ngOnInit() {
     this.loadData();
-
   }
 
   generateMarker(data: any, index: number) {
@@ -45,7 +48,7 @@ export class SearchComponent {
       draggable: data.draggable,
       icon: greenIcon,
     })
-      // .on('click', (event) => this.markerClicked(event, index))
+      .on('click', (event) => this.markerClicked(event, index))
       .on('dragend', (event) => this.markerDragEnd(event, index));
   }
 
@@ -54,7 +57,7 @@ export class SearchComponent {
   }
 
   mapClicked($event: any) {
-    // console.log($event.latlng.lat, $event.latlng.lng);
+    console.log($event.latlng.lat, $event.latlng.lng);
   }
 
   markerClicked($event: any, index: number) {
@@ -80,7 +83,7 @@ export class SearchComponent {
 
   loadData() {
     const sources = [
-      this.keepService.getKeepByUser(),
+      this.keepService.getAllKeppExceptUserCo(),
       this.keepService.getLocations(),
     ]
     forkJoin(sources).subscribe((response) => {
@@ -98,39 +101,45 @@ export class SearchComponent {
     })
   }
 
+
   getMarkers() {
-    const markers = [];
-    this.keeps.map((keep) => {
-      markers.push({
+    this.keeps.forEach((keep, index) => {
+      const geoCoding = {
         position: { lat: keep.location['latitude_location'], lng: keep.location['longitude_location'] },
         draggable: false,
-      })
-    })
-    this.markers = markers;
-    this.initMArkersInMap();
+      };
+      const formattedStartDate = this.frenchDatePipe.transform(keep.start_date_keep);
+      const formattedendDate = this.frenchDatePipe.transform(keep.end_date_keep);
+      const popupContent = ` <mat-card class="example-card" >
+          <img mat-card-image src="../../../../assets/image/plante1.jpg" width="50px" heigth="50px">
+          <img mat-card-image src="../../../../assets/image/plante2.jpg" width="50px" heigth="50px">
+          <img mat-card-image src="../../../../assets/image/plante2.jpg" width="50px" heigth="50px">
+          <mat-card-content>
+              <p class="localisation">${keep.location['city']}</p>
+              <p class="date">${formattedStartDate} - ${formattedendDate}</p>
+              <div>
+                  3 plantes à garder.
+                  Arrosé matin et soir
+              </div>
+          </mat-card-content>
+      </mat-card>`
+      const marker = this.generateMarker(geoCoding, index);
+      marker.addTo(this.map).bindPopup(popupContent)
+      this.map.panTo(geoCoding['position']);
+      marker.on('popupopen', (event) => {
+        const popup = event.popup;
+        popup.getElement().addEventListener('click', () => {
+          console.log(this.keeps)
+          console.log(keep)
+          this.keeps = [keep]
+
+          this.changeDetectorRef.detectChanges();
+        });
+      });
+    });
+
   }
 
-  initMArkersInMap() {
-    this.markers.forEach((value, index) => {
-      const marker = this.generateMarker(value, index);
-      marker.addTo(this.map)
-        .bindPopup(` <mat-card class="example-card" *ngFor="let keep of keeps">
-      <img mat-card-image src="../../../../assets/image/plante1.jpg" width="50px" heigth="50px">
-      <img mat-card-image src="../../../../assets/image/plante2.jpg" width="50px" heigth="50px">
-      <img mat-card-image src="../../../../assets/image/plante2.jpg" width="50px" heigth="50px">
-      <mat-card-content>
-          <p class="localisation">Marché saint clément, Montpellier</p>
-          <p class="date">15 mai 2023 - 09 mai 2023</p>
-          <div>
-              3 plantes à garder.
-              Arrosé matin et soir
-          </div>
-
-      </mat-card-content>
-  </mat-card>`);
-      this.map.panTo(value['position']);
-    })
-  }
 
   getData(data) {
     this.resetMap(data);

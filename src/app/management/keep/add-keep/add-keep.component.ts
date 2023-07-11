@@ -28,6 +28,8 @@ export class AddKeepComponent extends gestionForm implements OnInit {
   idKeep: number;
   plants: Plant[]
   keep: Keep;
+  localisation;
+  isUserKeep: boolean;
 
   superngOnInit(): void {
   }
@@ -40,7 +42,7 @@ export class AddKeepComponent extends gestionForm implements OnInit {
 
   createForm() {
     this.keepForm = this.fb.group({
-      keepLocalisation: [this.keep?.location_id, Validators.required],
+      keepLocalisation: [this.keep?.location.city, Validators.required],
       keepPlants: [this.keep?.plants ? this.getPlantsSelectedId() : [''], Validators.required],
       keepStartDate: [this.keep?.start_date_keep, Validators.required],
       keepEndDate: [this.keep?.end_date_keep, Validators.required],
@@ -52,11 +54,14 @@ export class AddKeepComponent extends gestionForm implements OnInit {
     if (this.idKeep) {
       const source = [
         this.plantService.getPlantByUser(),
-        this.keepService.getKeepById(this.idKeep)
+        this.keepService.getKeepById(this.idKeep),
+        this.keepService.getLocations()
       ]
       forkJoin(source).subscribe((response) => {
         this.plants = response[0]['plants'];
         this.keep = response[1]['keep']
+        this.localisation = response[2]['locations']
+        this.getLocationByKeep()
         this.createForm();
       })
     } else {
@@ -65,6 +70,13 @@ export class AddKeepComponent extends gestionForm implements OnInit {
       })
     }
 
+  }
+
+  getLocationByKeep() {
+    const adress = this.localisation.filter((localisation) =>
+      localisation.location_id == this.keep.location_id
+    )[0]
+    this.keep.location = adress
   }
 
   cancelAction() {

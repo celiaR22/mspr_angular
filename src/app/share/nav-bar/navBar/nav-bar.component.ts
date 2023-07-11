@@ -1,5 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
 import { NavBar } from 'src/app/models/navbar';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private snackBar: MatSnackBar, private router: Router) { }
 
   navigations: NavBar[] = [
     {
@@ -71,6 +73,17 @@ export class NavBarComponent implements OnInit {
     );
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe({
+      next: () => {
+        sessionStorage.removeItem('currentUser');
+        this.router.navigate(['/login']);
+      },
+      error: (error: any) => {
+        this.snackBar.open('Erreur de deconnexion', 'X', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+    });
   }
 }

@@ -15,4 +15,6 @@ export interface UserInformation {
   birthdate?: string;
   phone?: string;
   picture?: string;
+  cgu?: string;
+  newsletter?: string
 }
