@@ -1,5 +1,40 @@
 <app-nav-bar>
-    <div>
-        test
-    </div>
-</app-nav-bar>
+  <!-- Si L'utilisateur possède des message en base sinon -> afficher Aucune conversation disponible car aucune garde n'est en cour (click)="showMessages(contact)" [class.selected]="contact === selectedContact" -->
+    <div class="messagerie-container">
+        <div class="contacts">
+          <h2>Mes contacts</h2>
+          <ul>
+            <li *ngFor="let contact of contacts"  (click)="showMessages(contact)" class="test" [class.selected]="contact === selectedContact">
+              <div class="contact-info " matBadge="4" matBadgeOverlap="false" >
+                <h3>{{ contact.name }}</h3>
+              </div>
+           
+            </li>
+          </ul>
+        </div>
+        <div class="messages">
+          <h2>Garde du --/--/---- au --/--/----</h2>
+          <ul>
+            <li *ngFor="let message of messages">
+              <div class="message-header">
+                
+                <span class="sender">{{ message.sender }}</span>
+                <span class="timestamp">{{ message.timestamp | date:'shortTime' }}</span>
+              </div>
+              <div class="message-body">
+                {{ message.content }}
+              </div>
+              <hr>
+            </li>
+          </ul>
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Message</mat-label>
+              <input matInput #message maxlength="256" placeholder="Ex. I need help with...">
+              <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+              <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+</app-nav-bar> 
