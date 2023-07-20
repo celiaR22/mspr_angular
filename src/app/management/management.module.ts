@@ -15,7 +15,6 @@ import { AddKeepComponent } from '../management/keep/add-keep/add-keep.component
 import { CardKeepComponent } from '../management/keep/card-keep/card-keep.component';
 import { FrenchDatePipe } from '../share/pipe/date-format.pipe';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { FooterComponent } from '../share/footer/footer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { MessageComponent } from './message/message.component';
 

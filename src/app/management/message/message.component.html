@@ -8,12 +8,16 @@
               <div class="contact-info " matBadge="4" matBadgeOverlap="false" >
                 <h3>{{ contact.name }}</h3>
               </div>
-           
             </li>
           </ul>
         </div>
         <div class="messages">
-          <h2>Garde du --/--/---- au --/--/----</h2>
+          <div class="send">
+            <h2 class="sendBtn">Garde du 18/07/2023 au 24/07/2023</h2>
+            <button mat-raised-button class="btn-action sendBtn"
+            color="primary">Voir la garde</button>
+          </div>
+
           <ul>
             <li *ngFor="let message of messages">
               <div class="message-header">
@@ -27,14 +31,19 @@
               <hr>
             </li>
           </ul>
-          <form class="example-form">
-            <mat-form-field class="example-full-width">
+          <div class="fix">
+            <form class="example-form send " >
+            <mat-form-field class="example-full-width sendBtn">
               <mat-label>Message</mat-label>
-              <input matInput #message maxlength="256" placeholder="Ex. I need help with...">
+              <input matInput #message maxlength="256" placeholder="Ex. I need help with..." >
               <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
               <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
             </mat-form-field>
+            <button mat-raised-button class="btn-action test"
+            color="primary">Envoyer</button>
           </form>
+          </div>
+          
         </div>
       </div>
 </app-nav-bar> 

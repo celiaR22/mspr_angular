@@ -3,6 +3,20 @@
     flex-direction: row;
     height: 86vh;
   }
+  .send {
+    display: flex;
+    flex-direction: row;
+  }
+  .sendBtn{
+    margin-right:5%;
+  }
+  .test{
+   padding-right: 6%;
+  }
+
+  .fix{
+    position: static;
+  }
   
   .contacts {
     flex: 1;

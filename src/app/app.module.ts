@@ -10,6 +10,8 @@ import { ManagementModule } from './management/management.module';
 import { CguComponent } from './cgu/cgu.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { ContactComponent } from './contact/contact.component';
     AppMaterialModule,
     ManagementModule,
     AppRoutingModule,
-
+    provideFirebaseApp(() => initializeApp(environment.firebase)), // Initialisation de Firebase
   ],
   providers: [],
   bootstrap: [AppComponent]
